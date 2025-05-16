@@ -1,0 +1,11 @@
+.{
+    .name = .zzplug,
+    .version = "0.0.0",
+    .fingerprint = 0x3759cfaeb8ea9b4,
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
