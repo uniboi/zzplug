@@ -139,7 +139,7 @@ pub const PluginCallbacks = extern struct {
     /// Called after any dll has been loaded by the game process.
     ///
     /// This includes other plugins, dependencies used by northstar and modules loaded by the game.
-    on_library_loaded: *const fn (*const Instance, module: HMODULE, library_name: ?[*:0]const c_char) callconv(.C) void = onLibraryLoadedStub,
+    on_library_loaded: *const fn (*const Instance, module: HMODULE, library_name: ?[*:0]const u8) callconv(.C) void = onLibraryLoadedStub,
 
     /// Called every game frame
     run_frame: *const fn (*const Instance) callconv(.C) void = runFrameStub,
@@ -148,7 +148,7 @@ pub const PluginCallbacks = extern struct {
     fn unloadStub(_: *const Instance) callconv(.C) void {}
     fn onSqvmCreatedStub(_: *const Instance, _: *CSquirrelVM) callconv(.C) void {}
     fn onSqvmDestroyingStub(_: *const Instance, _: *CSquirrelVM) callconv(.C) void {}
-    fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const c_char) callconv(.C) void {}
+    fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const u8) callconv(.C) void {}
     fn runFrameStub(_: *const Instance) callconv(.C) void {}
 };
 
