@@ -1,27 +1,13 @@
-const std = @import("std");
-const HMODULE = std.os.windows.HMODULE;
-
-const zzplug = @import("zzplug");
-
-const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
-const InterfaceStatus = zzplug.interfaces.InterfaceStatus;
-
-const NsSys = zzplug.interfaces.NsSys;
-
-fn init(_: *const PluginCallbacks.Instance, ns_module: HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.C) void {
-    _ = reloaded;
-
-    const ns_create_interface = @as(*fn (name: [*:0]const u8, ?*InterfaceStatus) callconv(.C) *anyopaque, @ptrCast(std.os.windows.kernel32.GetProcAddress(ns_module, "CreateInterface")));
-    const sys: *const NsSys = @alignCast(@ptrCast(ns_create_interface("NSSys001", null)));
-    sys.vftable.log(sys, init_data.handle, .info, "Hello World!");
+fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.C) void {
+    zzplug.modules.northstar.log(.info, "Hello World");
 }
 
 const hello_world: zzplug.Plugin(
     .{
-        .name = "zzplug_test",
-        .log_name = "zzplug_test",
+        .name = "zzplug_example",
+        .log_name = "zzexample", // All NS log prefixes are 9 chars long. Plugins are free to choose any length but I usually use 9 to line the logs up
         .log_color = .{ .red = 224, .green = 187, .blue = 228 },
-        .dependency_name = "ZZPLUG_TEST",
+        .dependency_name = "ZZPLUG_EXAMPLE",
         .context = .{ .client = true, .dedicated = true },
     },
     .{
@@ -33,3 +19,11 @@ const hello_world: zzplug.Plugin(
 comptime {
     hello_world.embed();
 }
+
+const std = @import("std");
+const HMODULE = std.os.windows.HMODULE;
+
+const zzplug = @import("zzplug");
+
+const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
+const InterfaceStatus = zzplug.interfaces.InterfaceStatus;

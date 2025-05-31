@@ -16,7 +16,8 @@ pub fn build(b: *std.Build) void {
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_lib_unit_tests.step);
 
-    addExample(b, "hello_world", "loghello world when the plugin is loaded", zzplug, target, optimize);
+    addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target, optimize);
+    addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target, optimize);
 }
 
 fn addExample(b: *std.Build, comptime name: []const u8, comptime description: []const u8, zzplug: *std.Build.Module, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) void {

@@ -1,9 +1,4 @@
-const std = @import("std");
-const HMODULE = std.os.windows.HMODULE;
-const testing = std.testing;
-
-// TODO: proper squirrel things somewhere else
-pub const CSquirrelVM = opaque {};
+pub const CreateInterfacePtr = *const fn (name: [*:0]const u8, status: ?*InterfaceStatus) callconv(.c) ?*anyopaque;
 
 pub const InterfaceStatus = enum(c_int) {
     /// interface has been constructed
@@ -20,6 +15,7 @@ pub const PluginContext = packed struct(c_longlong) {
     /// Unused bits of the flag
     _: u62 = 0,
 
+    /// plugin is loaded in all contexts
     pub const always: @This() = .{ .dedicated = true, .client = true };
 };
 
@@ -131,10 +127,10 @@ pub const PluginCallbacks = extern struct {
     unload: *const fn (*const Instance) callconv(.C) void = unloadStub,
 
     /// Called after a sqvm has been created
-    on_sqvm_created: *const fn (*const Instance, sqvm: *CSquirrelVM) callconv(.C) void = onSqvmCreatedStub,
+    on_sqvm_created: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.C) void = onSqvmCreatedStub,
 
     /// Called right before a sqvm is being destroyed
-    on_sqvm_destroying: *const fn (*const Instance, sqvm: *CSquirrelVM) callconv(.C) void = onSqvmDestroyingStub,
+    on_sqvm_destroying: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.C) void = onSqvmDestroyingStub,
 
     /// Called after any dll has been loaded by the game process.
     ///
@@ -146,10 +142,15 @@ pub const PluginCallbacks = extern struct {
 
     fn finalizeStub(_: *const Instance) callconv(.C) void {}
     fn unloadStub(_: *const Instance) callconv(.C) void {}
-    fn onSqvmCreatedStub(_: *const Instance, _: *CSquirrelVM) callconv(.C) void {}
-    fn onSqvmDestroyingStub(_: *const Instance, _: *CSquirrelVM) callconv(.C) void {}
+    fn onSqvmCreatedStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
+    fn onSqvmDestroyingStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
     fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const u8) callconv(.C) void {}
     fn runFrameStub(_: *const Instance) callconv(.C) void {}
 };
 
-pub const NsSys = @import("interfaces/NsSys.zig");
+pub const NsSys = @import("interfaces/NsSys.zig").NsSys;
+const sq = @import("squirrel.zig");
+
+const std = @import("std");
+const HMODULE = std.os.windows.HMODULE;
+const testing = std.testing;
