@@ -1,4 +1,3 @@
-pub const @"undefined" = u8;
 pub const EHANDLE = enum(u32) { _ };
 pub const Func = *anyopaque;
 pub const time = f32;

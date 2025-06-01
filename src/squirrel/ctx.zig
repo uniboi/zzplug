@@ -1,19 +1,23 @@
 var sv: ContextRelay = undefined;
 var cl: ContextRelay = undefined;
 
-const ContextRelay = struct {
+pub const ContextRelay = struct {
     c_sqvm_register_function: *const fn (*sq.C_SQVM, *const sq.SQFunctionRegistration, usize) callconv(.c) void,
+
+    sq_throwerror: *const fn (*sq.SQVM, [*:0]const sq.SQChar) callconv(.c) sq.SQResult,
 };
 
 pub fn initForServer(server: *const Server) void {
     sv = .{
         .c_sqvm_register_function = server.CSQVM_RegisterFunction,
+        .sq_throwerror = server.sq_throwerror,
     };
 }
 
 pub fn initForClient(client: *const Client) void {
     cl = .{
         .c_sqvm_register_function = client.CSQVM_RegisterFunction,
+        .sq_throwerror = client.sq_throwerror,
     };
 }
 

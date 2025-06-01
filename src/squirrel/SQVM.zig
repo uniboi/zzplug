@@ -28,7 +28,7 @@ pub const SQVM = extern struct {
     _callstack_size: sq.SQUnsignedInteger,
     _stackbase: sq.SQUnsignedInteger,
     _stack_of_current_function: [*]sq.SQObject,
-    shared_state: *anyopaque,
+    shared_state: *sq.SQSharedState,
     unknown_58: *anyopaque,
     unknown_60: *anyopaque,
     _top: sq.SQUnsignedInteger,
@@ -91,18 +91,22 @@ pub const SQVM = extern struct {
         sqvm._top += 1;
     }
 
-    pub fn push_vector(sqvm: *SQVM, v: sq.SQObject.Vector) void {
+    pub fn push_vector(sqvm: *SQVM, v: Vector) void {
         const top_obj = &sqvm._stack._vals[sqvm._top];
         top_obj.release();
 
         top_obj.type = .vector;
-        top_obj.val.vec.value = v;
+        top_obj.val.vec = v;
 
         sqvm._top += 1;
     }
 
     pub fn getArgument(sqvm: *SQVM, arg: sq.SQUnsignedInteger) *sq.SQObject {
         return @ptrCast(sqvm._stack_of_current_function + arg);
+    }
+
+    pub fn throwerror(sqvm: *SQVM, msg: [*:0]const sq.SQChar) sq.SQResult {
+        return sqvm.shared_state.c_sqvm.context.ctx().sq_throwerror(sqvm, msg);
     }
 
     test {
@@ -114,3 +118,4 @@ pub const SQVM = extern struct {
 const sq = @import("../squirrel.zig");
 const SQInstruction = @import("./sqopcodes.zig").SQInstruction;
 const std = @import("std");
+const Vector = @import("../math/vector.zig").Vector3;

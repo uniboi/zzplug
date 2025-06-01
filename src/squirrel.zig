@@ -41,6 +41,10 @@ pub const ScriptContext = enum(u32) {
     server = 0,
     client = 1,
     ui = 2,
+
+    pub fn relay(context: ScriptContext) ctx.ContextRelay {
+        return .of(context);
+    }
 };
 
 pub const SQInteger = i32;

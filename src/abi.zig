@@ -58,4 +58,6 @@ pub const Module = opaque {
     }
 };
 
+pub const @"undefined" = u8;
+
 const std = @import("std");

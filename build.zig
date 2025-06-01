@@ -18,6 +18,7 @@ pub fn build(b: *std.Build) void {
 
     addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target, optimize);
     addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target, optimize);
+    addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target, optimize);
 }
 
 fn addExample(b: *std.Build, comptime name: []const u8, comptime description: []const u8, zzplug: *std.Build.Module, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) void {
