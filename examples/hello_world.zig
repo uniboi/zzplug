@@ -1,7 +1,11 @@
+//! A small plugin that logs "Hello World" in the console immediately after starting the game. That's it
+
+// this callback is called by northstar when the plugin module has been loaded
 fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.C) void {
     zzplug.modules.northstar.log(.info, "Hello World");
 }
 
+// configure the plugin
 const hello_world: zzplug.Plugin(
     .{
         .name = "zzplug_example",
@@ -11,11 +15,13 @@ const hello_world: zzplug.Plugin(
         .context = .{ .client = true, .dedicated = true },
     },
     .{
+        // specify the plugin callback that gets called by northstar immediately after loading
         .init = init,
     },
     .initComptime(.{}),
 ) = .{};
 
+// Calling the embed method on the plugin is required. Otherwise the plugin can't get loaded by northstar
 comptime {
     hello_world.embed();
 }
@@ -24,6 +30,4 @@ const std = @import("std");
 const HMODULE = std.os.windows.HMODULE;
 
 const zzplug = @import("zzplug");
-
 const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
-const InterfaceStatus = zzplug.interfaces.InterfaceStatus;

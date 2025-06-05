@@ -1,17 +1,26 @@
+//! Register a global squirrel function for every VM
+//! Try it out with `script print(Increment(1))` in the MP lobby (requires sv_cheats)
+//! This example shows the basics of squirrel objects and nativeclosures
+
 fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.C) void {}
 
 fn onSqvmCreated(_: *const PluginCallbacks.Instance, c_sqvm: *sq.C_SQVM) callconv(.c) void {
-    zzplug.modules.northstar.logFmt(.info, "created vm {}", .{c_sqvm.context});
-
     // onSqvmCreated is called for every SQVM, regardless of origin
     // to differentiate between Virtual Machines use sqvm.context
     switch (c_sqvm.context) {
         .server => {
-            // register script functions only for the SERVER vm here ...
+            // put functions you only want to register for the SERVER vm here
         },
-        .client => {},
-        .ui => {},
+        .client => {
+            // put client only functions here
+        },
+        .ui => {
+            // put ui only functions here
+        },
     }
+
+    // put functions registered regardless of context here
+
     const script_increment: sq.SQFunctionRegistration = .{
         .sq_name = "Increment", // Name of this function inside the sqvm
         .raw_return_type = "int", // Return type of this function. This is Squirrel syntax.
@@ -61,6 +70,4 @@ const HMODULE = std.os.windows.HMODULE;
 
 const zzplug = @import("zzplug");
 const sq = zzplug.squirrel;
-
 const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
-const InterfaceStatus = zzplug.interfaces.InterfaceStatus;

@@ -1,3 +1,10 @@
+//! Register a squirrel function on the SERVER VM that prints the last playing animation of an entity into the console.
+//! Call it like this: `script PrintCurrentSequence(GetPlayerArray()[0].GetActiveWeapon())`.
+//!
+//! This example shows the basics of using entities in a squirrel nativeclosure
+//! NOTE: Checking if the passed entity is an instance of CBaseEntity is not implemented in this example!
+//! If you pass an entity that's not animated to the closure, you *will* crash!
+
 fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.c) void {}
 
 fn onSqvmCreated(_: *const PluginCallbacks.Instance, c_sqvm: *sq.C_SQVM) callconv(.c) void {
@@ -65,9 +72,7 @@ const HMODULE = std.os.windows.HMODULE;
 
 const zzplug = @import("zzplug");
 const sq = zzplug.squirrel;
-
 const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
-const InterfaceStatus = zzplug.interfaces.InterfaceStatus;
 
 const ns = &zzplug.modules.northstar;
 const server = &zzplug.modules.server;
