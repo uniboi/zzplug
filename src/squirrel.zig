@@ -42,8 +42,8 @@ pub const ScriptContext = enum(u32) {
     client = 1,
     ui = 2,
 
-    pub fn relay(context: ScriptContext) ctx.ContextRelay {
-        return .of(context);
+    pub fn relay(context: ScriptContext) *const ctx.ContextRelay {
+        return ctx.of(context);
     }
 };
 

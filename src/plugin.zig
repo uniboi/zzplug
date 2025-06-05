@@ -1,3 +1,5 @@
+extern "kernel32" fn GetModuleHandleA(lpModuleName: ?[*:0]const u8) callconv(.winapi) ?std.os.windows.HMODULE;
+
 /// Create a configured Plugin type with a baked CreateInterface implementation
 ///
 /// In order to register your plugin, call the `embed` method at comptime:
@@ -18,6 +20,13 @@ pub fn Plugin(
     const Proxies = struct {
         pub fn init(instance: *const PluginCallbacks.Instance, ns_module: std.os.windows.HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.c) void {
             modules.initNorthstar(.fromHandle(ns_module));
+
+            const tier0 = GetModuleHandleA("tier0.dll");
+            if (tier0) |module| {
+                modules.initTier0(.fromHandle(module));
+            } else {
+                modules.northstar.log(.err, "tier0.dll is not loaded");
+            }
 
             callbacks.init(instance, ns_module, init_data, reloaded);
         }

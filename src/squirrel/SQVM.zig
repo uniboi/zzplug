@@ -106,7 +106,7 @@ pub const SQVM = extern struct {
     }
 
     pub fn throwerror(sqvm: *SQVM, msg: [*:0]const sq.SQChar) sq.SQResult {
-        return sqvm.shared_state.c_sqvm.context.ctx().sq_throwerror(sqvm, msg);
+        return sqvm.shared_state.c_sqvm.context.relay().sq_throwerror(sqvm, msg);
     }
 
     test {
