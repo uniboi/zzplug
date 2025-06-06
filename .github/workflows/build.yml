@@ -18,5 +18,4 @@ jobs:
           wineboot
       - name: Run Tests
         run: |
-          zig build build-tests
-          wineconsole ./zig-out/bin/test.exe
+          zig build test -fwine
