@@ -15,6 +15,9 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    const build_tests = b.addInstallArtifact(lib_unit_tests, .{});
+    const build_tests_step = b.step("build-tests", "Build unit tests");
+    build_tests_step.dependOn(&build_tests.step);
 
     const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
     const test_step = b.step("test", "Run unit tests");
