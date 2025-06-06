@@ -14,4 +14,5 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y wine64
-          zig build test
+          wine --version
+          zig build test -fwine
