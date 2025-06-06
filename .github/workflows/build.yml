@@ -13,5 +13,5 @@ jobs:
       - name: Install Wine
         run: |
           sudo apt update
-          sudo apt install -y wine64 wine32
+          sudo apt install -y wine
           zig build test -fwine
