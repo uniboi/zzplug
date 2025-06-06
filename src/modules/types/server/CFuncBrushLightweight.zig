@@ -2,7 +2,6 @@ pub const CFuncBrushLightweight = extern struct {
     vtable: *anyopaque,
     CFuncBrush: abi.Inherit(server.CFuncBrush),
 
-
     test {
         try std.testing.expect(@sizeOf(@This()) == 0x9f8);
     }

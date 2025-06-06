@@ -2,7 +2,6 @@ pub const CScriptNetData = extern struct {
     vtable: *anyopaque,
     CBaseEntity: abi.Inherit(server.CBaseEntity),
 
-
     test {
         try std.testing.expect(@sizeOf(@This()) == 0x9e0);
     }

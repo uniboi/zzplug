@@ -2,7 +2,6 @@ pub const CTriggerAutoCrouch = extern struct {
     vtable: *anyopaque,
     CBaseTrigger: abi.Inherit(server.CBaseTrigger),
 
-
     test {
         try std.testing.expect(@sizeOf(@This()) == 0xc60);
     }

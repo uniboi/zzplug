@@ -2,7 +2,6 @@ pub const CEnvSoundscapeTriggerable = extern struct {
     vtable: *anyopaque,
     CEnvSoundscape: abi.Inherit(server.CEnvSoundscape),
 
-
     test {
         try std.testing.expect(@sizeOf(@This()) == 0xa68);
     }

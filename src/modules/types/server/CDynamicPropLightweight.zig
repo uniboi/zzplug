@@ -2,7 +2,6 @@ pub const CDynamicPropLightweight = extern struct {
     vtable: *anyopaque,
     CDynamicProp: abi.Inherit(server.CDynamicProp),
 
-
     test {
         try std.testing.expect(@sizeOf(@This()) == 0x1028);
     }
