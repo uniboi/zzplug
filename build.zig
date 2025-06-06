@@ -1,7 +1,11 @@
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{});
+    const target = b.resolveTargetQuery(.{
+        .cpu_arch = .x86_64,
+        .cpu_model = .baseline,
+        .os_tag = .windows,
+    });
     const optimize = b.standardOptimizeOption(.{});
 
     const zzplug = b.addModule("zzplug", .{ .root_source_file = b.path("./src/zzplug.zig") });
