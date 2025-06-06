@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - master
-      - workflows
+      - workflow
 jobs:
   test:
     runs-on: ubuntu-latest
