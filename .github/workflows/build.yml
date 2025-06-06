@@ -15,4 +15,4 @@ jobs:
           sudo dpkg --add-architecture i386
           sudo apt update
           sudo apt install -y wine64 wine32:i386
-      - run: zig build test
+      - run: zig build test -fwine
