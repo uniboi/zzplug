@@ -16,7 +16,7 @@ pub const AIScheduleState_t = extern struct {
     bStopRunTasks: bool, // +0x2a size: 0x1 (0x1 * 0x1) type 6
 
     test {
-        try std.testing.expect(@sizeOf(@This()) == 0x31);
+        try std.testing.expect(@sizeOf(@This()) == 0x30);
         try std.testing.expect(@offsetOf(@This(), "iCurTask") == 0x0);
         try std.testing.expect(@offsetOf(@This(), "fTaskStatus") == 0x4);
         try std.testing.expect(@offsetOf(@This(), "timeStarted") == 0x8);
