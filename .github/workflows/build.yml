@@ -16,4 +16,7 @@ jobs:
           sudo apt update
           sudo apt install -y wine64 wine32:i386
           wineboot
-      - run: zig build test -fwine
+      - name: Run Tests
+        run: |
+          zig build build-tests
+          wineconsole ./zig-out/bin/test.exe
