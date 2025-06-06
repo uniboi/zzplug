@@ -11,7 +11,7 @@ pub const SQStructInstance = structs.SQStructInstance;
 pub const SQStructDef = structs.SQStructDef;
 
 pub const SQSharedState = @import("squirrel/sharedstate.zig").SQSharedState;
-pub const SQString = @import("squirrel/string.zig").SQString;
+pub const SQString = @import("squirrel/SQString.zig").SQString;
 pub const SQTable = @import("squirrel/SQTable.zig").SQTable;
 
 const closures = @import("squirrel/closure.zig");

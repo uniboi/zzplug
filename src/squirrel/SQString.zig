@@ -14,17 +14,15 @@ pub const SQString = opaque {
         }
     };
 
-    const data_offset = 0x30;
-
     pub fn head(s: *SQString) *Head {
         return @ptrCast(@alignCast(s));
     }
 
     pub fn data(s: *SQString) []sq.SQChar {
         const length = s.head().length;
-        const d: [*]sq.SQChar = @ptrFromInt(@intFromPtr(s) + data_offset);
+        const d: [*]sq.SQChar = @ptrFromInt(@intFromPtr(s) + @sizeOf(Head));
 
-        // TODO: Are SQStrings always null terminated?
+        // sometimes strings are zero terminated. respawn moment
         if (d[length - 1] == 0) {
             return d[0 .. length - 1];
         }
