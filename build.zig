@@ -16,12 +16,28 @@ pub fn build(b: *std.Build) void {
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_lib_unit_tests.step);
 
+    const docs_step = b.step("docs", "Emit documentation");
+
+    const docs_install_dir = b.addInstallDirectory(.{
+        .install_dir = .prefix,
+        .install_subdir = "docs",
+        .source_dir = lib_unit_tests.getEmittedDocs(),
+    });
+    docs_step.dependOn(&docs_install_dir.step);
+
     addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target, optimize);
     addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target, optimize);
     addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target, optimize);
 }
 
-fn addExample(b: *std.Build, comptime name: []const u8, comptime description: []const u8, zzplug: *std.Build.Module, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) void {
+fn addExample(
+    b: *std.Build,
+    comptime name: []const u8,
+    comptime description: []const u8,
+    zzplug: *std.Build.Module,
+    target: std.Build.ResolvedTarget,
+    optimize: std.builtin.OptimizeMode,
+) void {
     const example = b.addSharedLibrary(.{
         .name = name ++ "_example",
         .root_source_file = b.path("examples/" ++ name ++ ".zig"),
