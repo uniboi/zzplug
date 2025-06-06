@@ -1,16 +1,14 @@
 pub const SQString = opaque {
     pub const Head = extern struct {
         vtable: *anyopaque,
-        rc: sq.SQInteger,
-        weakref: ?*sq.SQWeakRef,
-        _shared_state: *sq.SQSharedState,
+        SQRefcounted: abi.Inherit(sq.SQRefcounted),
 
+        shared_state: *sq.SQSharedState,
         length: sq.SQUnsignedInteger,
         hash: u64,
 
         test {
-            comptime abi.assertSize(@This(), 0x30);
-            comptime abi.assertInheritance(@This(), sq.SQRefcounted);
+            abi.assertSize(@This(), 0x30);
         }
     };
 

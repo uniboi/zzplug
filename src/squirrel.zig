@@ -81,20 +81,17 @@ pub const SQRefcounted = extern struct {
 
 pub const SQWeakRef = extern struct {
     vtable: *anyopaque,
-    rc: SQInteger,
-    weakref: ?*SQWeakRef,
+    SQRefcounted: abi.Inherit(SQRefcounted),
     obj: SQObject,
 
     test {
-        comptime abi.assertSize(@This(), 0x28);
-        comptime abi.assertInheritance(@This(), SQRefcounted);
+        abi.assertSize(@This(), 0x28);
     }
 };
 
 pub const SQCollectable = extern struct {
     vtable: *anyopaque,
-    rc: SQInteger,
-    weakref: ?*SQWeakRef,
+    SQRefcounted: abi.Inherit(SQRefcounted),
     _next: ?*SQCollectable,
     _prev: ?*SQCollectable,
     _shared_state: *SQSharedState,
@@ -105,23 +102,17 @@ pub const SQCollectable = extern struct {
     }
 
     test {
-        comptime abi.assertSize(@This(), 0x30);
-        comptime abi.assertInheritance(@This(), SQRefcounted);
+        abi.assertSize(@This(), 0x30);
     }
 };
 
 pub const SQDelegable = extern struct {
     vtable: *anyopaque,
-    rc: SQInteger,
-    weakref: ?*SQWeakRef,
-    _next: ?*SQCollectable,
-    _prev: ?*SQCollectable,
-    _shared_state: *SQSharedState,
+    SQCollectable: abi.Inherit(SQCollectable),
     _delegate: *SQTable,
 
     test {
-        comptime abi.assertSize(@This(), 0x38);
-        comptime abi.assertInheritance(@This(), SQCollectable);
+        abi.assertSize(@This(), 0x38);
     }
 };
 

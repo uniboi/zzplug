@@ -1,11 +1,6 @@
 pub const SQTable = extern struct {
     vtable: *anyopaque,
-    rc: sq.SQInteger,
-    weakref: ?*sq.SQWeakRef,
-    _next: ?*sq.SQCollectable,
-    _prev: ?*sq.SQCollectable,
-    _shared_state: *sq.SQSharedState,
-    _delegate: *@This(),
+    SQDelegable: abi.Inherit(sq.SQDelegable),
 
     _nodes: [*]HashNode,
     _numofnodes: sq.SQUnsignedInteger,
@@ -23,8 +18,7 @@ pub const SQTable = extern struct {
     };
 
     test {
-        comptime abi.assertSize(@This(), 0x50);
-        comptime abi.assertInheritance(@This(), sq.SQDelegable);
+        abi.assertSize(@This(), 0x50);
     }
 };
 

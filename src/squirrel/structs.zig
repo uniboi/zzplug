@@ -1,18 +1,13 @@
 pub const SQStructInstance = opaque {
     pub const Head = extern struct {
         vtable: *anyopaque,
-        rc: sq.SQInteger,
-        weakref: ?*sq.SQWeakRef,
-        _next: ?*sq.SQCollectable,
-        _prev: ?*sq.SQCollectable,
-        _shared_state: *sq.SQSharedState,
+        SQCollectable: abi.Inherit(sq.SQCollectable),
 
         size: sq.SQUnsignedInteger,
         unknown_u34: sq.SQInteger,
 
         test {
             try std.testing.expect(@offsetOf(Head, "size") == 0x30);
-            comptime abi.assertInheritance(Head, sq.SQCollectable);
         }
     };
 

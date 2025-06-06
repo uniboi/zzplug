@@ -24,7 +24,10 @@ pub fn Inherit(T: type) type {
 
     const fields = fields: {
         if (info.@"struct".fields.len == 0) break :fields &.{};
+
+        // TODO: multiple vtables are possible
         if (std.mem.eql(u8, info.@"struct".fields[0].name, "vtable")) break :fields info.@"struct".fields[1..];
+
         break :fields info.@"struct".fields;
     };
 

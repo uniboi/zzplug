@@ -1,10 +1,6 @@
 pub const SQClosure = extern struct {
     vtable: *anyopaque,
-    rc: sq.SQInteger,
-    weakref: ?*sq.SQWeakRef,
-    _next: ?*sq.SQCollectable,
-    _prev: ?*sq.SQCollectable,
-    _shared_state: *sq.SQSharedState,
+    SQCollectable: abi.Inherit(sq.SQCollectable),
 
     _env: sq.SQObject,
     _function: sq.SQObject,
@@ -12,19 +8,14 @@ pub const SQClosure = extern struct {
     _defaultparams: *sq.Vector(sq.SQObject),
 
     test {
-        comptime abi.assertSize(@This(), 0x60);
-        comptime abi.assertInheritance(@This(), sq.SQCollectable);
+        abi.assertSize(@This(), 0x60);
     }
 };
 
 pub const SQFunctionProto = opaque {
     pub const Head = extern struct {
         vtable: *anyopaque,
-        rc: sq.SQInteger,
-        weakref: ?*sq.SQWeakRef,
-        _next: ?*sq.SQCollectable,
-        _prev: ?*sq.SQCollectable,
-        _shared_state: *sq.SQSharedState,
+        SQCollectable: abi.Inherit(sq.SQCollectable),
 
         unknown_30: *anyopaque,
         _source_name: sq.SQObject,
@@ -71,8 +62,6 @@ pub const SQFunctionProto = opaque {
             try std.testing.expect(@offsetOf(@This(), "unknown_e8") == 0xe8);
             try std.testing.expect(@offsetOf(@This(), "unknown_f0") == 0xf0);
             try std.testing.expect(@offsetOf(@This(), "unknown_f8") == 0xf8);
-
-            comptime abi.assertInheritance(@This(), sq.SQCollectable);
         }
     };
 
