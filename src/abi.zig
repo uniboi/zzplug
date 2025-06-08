@@ -57,7 +57,9 @@ pub const squirrel_object_hierarchy: Tree(type) = .{
     .children = &.{
         .{ .value = sq.SQWeakRef },
         .{ .value = sq.SQString },
-        // .{ .value = sq.SQVM },
+        .{ .value = sq.SQFunctionProto },
+        .{ .value = sq.SQFunctionProtoUnimplemented },
+        // .{ .value = sq.SQVM }, // Not sure about this one
         .{
             .value = sq.SQCollectable,
             .children = &.{
@@ -65,11 +67,14 @@ pub const squirrel_object_hierarchy: Tree(type) = .{
                 .{ .value = sq.SQFunctionProto },
                 .{ .value = sq.SQArray },
                 .{ .value = sq.SQStructInstance },
-                // .{ .value = sq.SQStructDef },
+                .{ .value = sq.SQStructDef },
+                .{ .value = sq.SQClass },
+                .{ .value = sq.SQNativeClosure },
                 .{
                     .value = sq.SQDelegable,
                     .children = &.{
                         .{ .value = sq.SQTable },
+                        .{ .value = sq.SQInstance },
                     },
                 },
             },
