@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - master
-      - workflow
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,6 +23,5 @@ jobs:
       - name: Compile all examples
         run: |
           for example in "./examples"; do
-            zig build example.${examle}
+            zig build "example.${examle}"
           done
-
