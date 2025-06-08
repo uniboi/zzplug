@@ -115,8 +115,8 @@ pub const SQVM = extern struct {
     }
 };
 
-const sq = @import("../squirrel.zig");
-const SQInstruction = @import("./sqopcodes.zig").SQInstruction;
+const sq = @import("../../squirrel.zig");
+const SQInstruction = @import("../sqopcodes.zig").SQInstruction;
 const std = @import("std");
-const Vector = @import("../math/vector.zig").Vector3;
-const abi = @import("../abi.zig");
+const Vector = @import("../../math/vector.zig").Vector3;
+const abi = @import("../../abi.zig");

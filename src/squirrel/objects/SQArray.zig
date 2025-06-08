@@ -10,6 +10,6 @@ pub const SQArray = extern struct {
     }
 };
 
-const sq = @import("../squirrel.zig");
-const abi = @import("../abi.zig");
+const sq = @import("../../squirrel.zig");
+const abi = @import("../../abi.zig");
 const std = @import("std");

@@ -1,0 +1,11 @@
+pub const SQArray = @import("./objects/SQArray.zig").SQArray;
+pub const SQCollectable = @import("./objects/SQCollectable.zig").SQCollectable;
+pub const SQDelegable = @import("./objects/SQDelegable.zig").SQDelegable;
+pub const SQObject = @import("./objects/SQObject.zig").SQObject;
+pub const SQRefCounted = @import("./objects/SQRefCounted.zig").SQRefCounted;
+pub const SQString = @import("./objects/SQString.zig").SQString;
+pub const SQStructDef = @import("./objects/SQStructDef.zig").SQStructDef;
+pub const SQStructInstance = @import("./objects/SQStructInstance.zig").SQStructInstance;
+pub const SQTable = @import("./objects/SQTable.zig").SQTable;
+pub const SQVM = @import("./objects/SQVM.zig").SQVM;
+pub const SQWeakRef = @import("./objects/SQWeakRef.zig").SQWeakRef;

@@ -39,6 +39,6 @@ pub const SQTable = extern struct {
     }
 };
 
-const sq = @import("../squirrel.zig");
+const sq = @import("../../squirrel.zig");
 const std = @import("std");
-const abi = @import("../abi.zig");
+const abi = @import("../../abi.zig");
