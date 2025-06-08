@@ -20,6 +20,8 @@ pub const SQFunctionProto = closures.SQFunctionProto;
 
 pub const Vector = @import("squirrel/vec.zig").Vec;
 
+pub const SQArray = @import("squirrel/SQArray.zig").SQArray;
+
 pub const ctx = @import("squirrel/ctx.zig");
 
 pub const SQResult = enum(i32) {
