@@ -20,5 +20,10 @@ jobs:
           # sudo apt install -y wine64 wine32:i386
           wineboot
       - name: Run Tests
+        run: zig build test -fwine
+      - name: Compile all examples
         run: |
-          zig build test -fwine
+          for example in "./examples"; do
+            zig build example.${examle}
+          done
+
