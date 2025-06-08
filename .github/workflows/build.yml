@@ -22,6 +22,7 @@ jobs:
         run: zig build test -fwine
       - name: Compile all examples
         run: |
-          for example in "./examples"; do
-            zig build example.${example}
+          for example in "./examples/*.zig"; do
+            filename=$(basename $file)
+            zig build example.${filename%.*}
           done
