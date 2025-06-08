@@ -1,8 +1,12 @@
 pub const SQArray = @import("./objects/SQArray.zig").SQArray;
+pub const SQClass = @import("./objects/SQClass.zig").SQClass;
 pub const SQClosure = @import("./objects/SQClosure.zig").SQClosure;
 pub const SQCollectable = @import("./objects/SQCollectable.zig").SQCollectable;
 pub const SQDelegable = @import("./objects/SQDelegable.zig").SQDelegable;
 pub const SQFunctionProto = @import("./objects/SQFunctionProto.zig").SQFunctionProto;
+pub const SQFunctionProtoUnimplemented = @import("./objects/SQFunctionProtoUnimplemented.zig").SQFunctionProtoUnimplemented;
+pub const SQInstance = @import("./objects/SQInstance.zig").SQInstance;
+pub const SQNativeClosure = @import("./objects/SQNativeClosure.zig").SQNativeClosure;
 pub const SQObject = @import("./objects/SQObject.zig").SQObject;
 pub const SQRefCounted = @import("./objects/SQRefCounted.zig").SQRefCounted;
 pub const SQString = @import("./objects/SQString.zig").SQString;

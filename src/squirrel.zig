@@ -5,10 +5,14 @@ pub const SQSharedState = @import("squirrel/sharedstate.zig").SQSharedState;
 
 const o = @import("./squirrel/objects.zig");
 pub const SQArray = o.SQArray;
+pub const SQClass = o.SQClass;
 pub const SQClosure = o.SQClosure;
 pub const SQCollectable = o.SQCollectable;
 pub const SQDelegable = o.SQDelegable;
 pub const SQFunctionProto = o.SQFunctionProto;
+pub const SQFunctionProtoUnimplemented = o.SQFunctionProtoUnimplemented;
+pub const SQInstance = o.SQInstance;
+pub const SQNativeClosure = o.SQNativeClosure;
 pub const SQObject = o.SQObject;
 pub const SQRefCounted = o.SQRefCounted;
 pub const SQString = o.SQString;
