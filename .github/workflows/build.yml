@@ -23,6 +23,6 @@ jobs:
       - name: Compile all examples
         run: |
           for example in "./examples/*.zig"; do
-            filename=$(basename $file)
+            filename=$(basename $example)
             zig build example.${filename%.*}
           done
