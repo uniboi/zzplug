@@ -8,18 +8,23 @@ pub const SQObject = extern struct {
         integer: Padded(sq.SQInteger),
         float: Padded(sq.SQFloat),
         bool: Padded(sq.SQBool),
-
         vec: Vector3,
 
         refcounted: Padded(*sq.SQRefCounted),
         delegable: Padded(*sq.SQDelegable),
         weakref: Padded(*sq.SQWeakRef),
 
-        string: Padded(*sq.SQString),
-        table: Padded(*sq.SQTable),
-        struct_instance: Padded(*sq.SQStructInstance),
+        class: Padded(*sq.SQClass),
+        array: Padded(*sq.SQArray),
         closure: Padded(*sq.SQClosure),
         function_proto: Padded(*sq.SQFunctionProto),
+        function_proto_unimplemented: Padded(*sq.SQFunctionProtoUnimplemented),
+        instance: Padded(*sq.SQInstance),
+        native_closure: Padded(*sq.SQNativeClosure),
+        string: Padded(*sq.SQString),
+        struct_def: Padded(*sq.SQStructDef),
+        struct_instance: Padded(*sq.SQStructInstance),
+        table: Padded(*sq.SQTable),
         thread: Padded(*sq.SQVM),
 
         // ...
@@ -58,18 +63,18 @@ pub const SQObject = extern struct {
     }
 
     pub fn format(self: SQObject, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
-        _ = try writer.print("SQObject{{ {s} ", .{@tagName(self.type)});
         switch (self.type) {
-            .integer => _ = try writer.print("{}", .{self.val.integer.value}),
-            .float => _ = try writer.print("{d}", .{self.val.float.value}),
-            .bool => _ = try writer.print("{}", .{self.val.bool.value}),
-            .vector => _ = try writer.print("< {d}, {d}, {d} >", .{ self.val.vec.x, self.val.vec.y, self.val.vec.z }),
-            .string => _ = try writer.print("{s}", .{self.val.string.value.data()}),
-            .weakref => _ = try writer.print("{}", .{self.val.weakref.value.obj}),
-            else => _ = try writer.print("{}", .{self.val.ptr.value}),
+            .integer => try writer.print("SQInteger{{ {} }}", .{self.val.integer.value}),
+            .float => try writer.print("SQFloat{{ {d} }}", .{self.val.float.value}),
+            .bool => try writer.print("SQBool{{ {} }}", .{self.val.bool.value}),
+            .vector => try writer.print("Vector3{{ < {d}, {d}, {d} > }}", .{ self.val.vec.x, self.val.vec.y, self.val.vec.z }),
+            .weakref => try writer.print("SQWeakRef{{ {} }}", .{self.val.weakref.value.obj}),
+            .struct_instance => try writer.print("{}", .{self.value(.struct_instance)}),
+            .table => try writer.print("{}", .{self.value(.table)}),
+            .array => try writer.print("{}", .{self.value(.array)}),
+            .string => try writer.print("{}", .{self.value(.string)}),
+            else => try writer.print("SQObject{{ {} }}", .{self.val.ptr.value}),
         }
-
-        _ = try writer.write(" }");
     }
 
     pub fn downCast(T: type, val: anytype) *T {
@@ -86,7 +91,7 @@ pub const SQObject = extern struct {
         array: bool = false, // 0x40
         userdata: bool = false, // 0x80
         closure: bool = false, // 0x100
-        nativeclosure: bool = false, // 0x200
+        native_closure: bool = false, // 0x200
         asset: bool = false, // 0x400
         userpointer: bool = false, // 0x800
         thread: bool = false, // 0x1000
@@ -122,7 +127,7 @@ pub const SQObject = extern struct {
             array = @bitCast(SQObjectType{ .array = true, .refcounted = true }),
             userdata = @bitCast(SQObjectType{ .userdata = true, .refcounted = true, .delegable = true }),
             closure = @bitCast(SQObjectType{ .closure = true, .refcounted = true }),
-            nativeclosure = @bitCast(SQObjectType{ .nativeclosure = true, .refcounted = true }),
+            native_closure = @bitCast(SQObjectType{ .native_closure = true, .refcounted = true }),
             asset = @bitCast(SQObjectType{ .asset = true, .refcounted = true }),
             thread = @bitCast(SQObjectType{ .thread = true, .refcounted = true }),
             funcproto = @bitCast(SQObjectType{ .function_proto = true, .refcounted = true }),

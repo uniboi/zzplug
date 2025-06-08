@@ -15,6 +15,39 @@ pub const SQTable = extern struct {
         return table.nodes[0..table.numofnodes];
     }
 
+    pub fn format(table: *SQTable, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+        _ = try writer.write("SQTable{");
+
+        var iter: Iterator = .{ .table = table };
+        while (iter.next()) |node| {
+            try writer.print(" [{}] = {}", .{ node.key, node.val });
+            if (node.next != null) {
+                _ = try writer.write(", ");
+            }
+        }
+
+        _ = try writer.write(" }");
+    }
+
+    pub const Iterator = struct {
+        table: *SQTable,
+        current_node: ?*HashNode = null,
+
+        pub fn next(iter: *Iterator) ?*HashNode {
+            const idx = if (iter.current_node != null) (@intFromPtr(iter.current_node) - @intFromPtr(iter.table.nodes)) / @sizeOf(HashNode) else 0;
+            if (idx + 1 == iter.table.numofnodes) return null;
+
+            for (iter.table.slots()[idx + 1 ..]) |*node| {
+                if (node.key.type != .null) {
+                    iter.current_node = node;
+                    return node;
+                }
+            }
+
+            return null;
+        }
+    };
+
     pub const HashNode = extern struct {
         val: sq.SQObject,
         key: sq.SQObject,

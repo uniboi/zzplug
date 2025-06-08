@@ -32,7 +32,11 @@ pub const SQString = opaque {
 
         return d[0..length];
     }
+    pub fn format(self: *SQString, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+        try writer.print("SQString{{ {s} }}", .{self.data()});
+    }
 };
 
 const sq = @import("../../squirrel.zig");
 const abi = @import("../../abi.zig");
+const std = @import("std");
