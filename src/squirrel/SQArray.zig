@@ -1,8 +1,9 @@
 pub const SQArray = extern struct {
-    vtable: *anyopaque,
+    vtable: *VTable,
     SQCollectable: abi.Inherit(sq.SQCollectable),
     values: sq.Vector(sq.SQObject),
-    print: *const fn (*SQArray, buf: [*]u8, buf_size: u32, unk_1: i64, unk_2: i32) callconv(.c) i64,
+
+    pub const VTable = extern struct {};
 
     test {
         abi.assertSize(@This(), 0x40);

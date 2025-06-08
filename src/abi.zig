@@ -41,29 +41,48 @@ pub fn Inherit(T: type) type {
     });
 }
 
-pub const Module = opaque {
-    pub fn fromHandle(h: std.os.windows.HMODULE) *Module {
-        return @ptrCast(h);
+pub fn downCast(T: type, hierarchy: Tree(type), value: anytype) *T {
+    comptime {
+        const VT = std.meta.Child(@TypeOf(value));
+
+        const subtree = hierarchy.find(T) orelse @compileError(@typeName(T) ++ " does not exist in hierarchy");
+        if (subtree.find(VT) == null) @compileError(@typeName(VT) ++ " does not inherit " ++ @typeName(T));
     }
 
-    pub fn handle(mod: *Module) std.os.windows.HMODULE {
-        return @ptrCast(mod);
-    }
+    return @ptrCast(value);
+}
 
-    pub fn offset(mod: *Module, data_offset: usize) *align(8) anyopaque {
-        return @ptrFromInt(@intFromPtr(mod) + data_offset);
-    }
-
-    pub fn patch(mod: *Module, data_offset: usize, data: []const u8) usize {
-        const bytes: [*]u8 = @ptrCast(mod.offset(data_offset));
-        var stream = std.io.fixedBufferStream(bytes[0..data.len]);
-        return stream.writer().write(data) catch unreachable;
-    }
+pub const squirrel_object_hierarchy: Tree(type) = .{
+    .value = sq.SQRefCounted,
+    .children = &.{
+        .{ .value = sq.SQWeakRef },
+        .{ .value = sq.SQString },
+        // .{ .value = sq.SQVM },
+        .{
+            .value = sq.SQCollectable,
+            .children = &.{
+                .{ .value = sq.SQClosure },
+                .{ .value = sq.SQFunctionProto },
+                .{ .value = sq.SQArray },
+                .{ .value = sq.SQStructInstance },
+                // .{ .value = sq.SQStructDef },
+                .{
+                    .value = sq.SQDelegable,
+                    .children = &.{
+                        .{ .value = sq.SQTable },
+                    },
+                },
+            },
+        },
+    },
 };
 
+pub const Module = @import("abi/module.zig").Module;
+/// describes padding or an unknown type with a known size
 pub const @"undefined" = u8;
-
 /// a pointer that is potentially deallocated
 pub const IllegalPointer = *opaque {};
 
 const std = @import("std");
+const Tree = @import("abi/tree.zig").Tree;
+const sq = @import("squirrel.zig");

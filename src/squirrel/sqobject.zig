@@ -72,6 +72,10 @@ pub const SQObject = extern struct {
         _ = try writer.write(" }");
     }
 
+    pub fn downCast(T: type, val: anytype) *T {
+        return abi.downCast(T, abi.squirrel_object_hierarchy, val);
+    }
+
     test "SQObject size" {
         try std.testing.expect(@sizeOf(SQObject) == 0x10);
     }
@@ -162,3 +166,4 @@ pub const SQObjectType = packed struct(u32) {
 const std = @import("std");
 const sq = @import("../squirrel.zig");
 const Vector3 = @import("../math/vector.zig").Vector3;
+const abi = @import("../abi.zig");
