@@ -34,5 +34,5 @@ pub const SQString = opaque {
     }
 };
 
-const sq = @import("../squirrel.zig");
-const abi = @import("../abi.zig");
+const sq = @import("../../squirrel.zig");
+const abi = @import("../../abi.zig");

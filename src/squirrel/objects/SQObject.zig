@@ -164,6 +164,6 @@ pub const SQObject = extern struct {
 };
 
 const std = @import("std");
-const sq = @import("../squirrel.zig");
-const Vector3 = @import("../math/vector.zig").Vector3;
-const abi = @import("../abi.zig");
+const sq = @import("../../squirrel.zig");
+const Vector3 = @import("../../math/vector.zig").Vector3;
+const abi = @import("../../abi.zig");
