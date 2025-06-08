@@ -1,11 +1,16 @@
 pub const SQString = opaque {
     pub const Head = extern struct {
-        vtable: *anyopaque,
-        SQRefcounted: abi.Inherit(sq.SQRefcounted),
+        vtable: *VTable,
+        SQRefCounted: abi.Inherit(sq.SQRefCounted),
 
         shared_state: *sq.SQSharedState,
         length: sq.SQUnsignedInteger,
         hash: u64,
+
+        pub const VTable = extern struct {
+            destructor: *const fn (*SQString, deallocate: bool) callconv(.c) abi.IllegalPointer,
+            release: *const fn (*SQString) callconv(.c) void,
+        };
 
         test {
             abi.assertSize(@This(), 0x30);

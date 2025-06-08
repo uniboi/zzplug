@@ -63,4 +63,7 @@ pub const Module = opaque {
 
 pub const @"undefined" = u8;
 
+/// a pointer that is potentially deallocated
+pub const IllegalPointer = *opaque {};
+
 const std = @import("std");

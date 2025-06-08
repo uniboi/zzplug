@@ -11,8 +11,8 @@ pub const SQObject = extern struct {
 
         vec: Vector3,
 
-        refcounted: Padded(*sq.SQRefcounted),
-        delegable: Padded(*anyopaque),
+        refcounted: Padded(*sq.SQRefCounted),
+        delegable: Padded(*sq.SQDelegable),
         weakref: Padded(*sq.SQWeakRef),
 
         string: Padded(*sq.SQString),
@@ -20,8 +20,8 @@ pub const SQObject = extern struct {
         struct_instance: Padded(*sq.SQStructInstance),
         closure: Padded(*sq.SQClosure),
         function_proto: Padded(*sq.SQFunctionProto),
+        thread: Padded(*sq.SQVM),
 
-        // ptr: extern struct { _: u32, value: *anyopaque },
         // ...
 
         fn Padded(comptime T: type) type {
