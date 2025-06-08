@@ -23,5 +23,5 @@ jobs:
       - name: Compile all examples
         run: |
           for example in "./examples"; do
-            zig build "example.${examle}"
+            zig build example.${example}
           done
