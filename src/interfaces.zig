@@ -123,8 +123,10 @@ pub const PluginCallbacks = extern struct {
 
     /// Called before this plugin will get unloaded by Northstar.
     ///
+    /// The plugin will only get unloaded if `true` is returned.
+    ///
     /// Destroy all state used by the plugin here.
-    unload: *const fn (*const Instance) callconv(.C) void = unloadStub,
+    unload: *const fn (*const Instance) callconv(.C) bool = unloadStub,
 
     /// Called after a sqvm has been created
     on_sqvm_created: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.C) void = onSqvmCreatedStub,
@@ -141,7 +143,9 @@ pub const PluginCallbacks = extern struct {
     run_frame: *const fn (*const Instance) callconv(.C) void = runFrameStub,
 
     fn finalizeStub(_: *const Instance) callconv(.C) void {}
-    fn unloadStub(_: *const Instance) callconv(.C) void {}
+    fn unloadStub(_: *const Instance) callconv(.C) bool {
+        return false;
+    }
     fn onSqvmCreatedStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
     fn onSqvmDestroyingStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
     fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const u8) callconv(.C) void {}
