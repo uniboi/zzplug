@@ -70,6 +70,7 @@ pub const squirrel_object_hierarchy: Tree(type) = .{
                 .{ .value = sq.SQStructDef },
                 .{ .value = sq.SQClass },
                 .{ .value = sq.SQNativeClosure },
+                .{ .value = sq.SQVM }, // Not sure about this one
                 .{
                     .value = sq.SQDelegable,
                     .children = &.{
