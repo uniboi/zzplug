@@ -41,7 +41,7 @@ pub fn Inherit(T: type) type {
     });
 }
 
-pub fn downCast(T: type, hierarchy: Tree(type), value: anytype) if(@typeInfo(@TypeOf(value)).pointer.is_const) *const T else *T {
+pub fn upcast(T: type, hierarchy: Tree(type), value: anytype) if(@typeInfo(@TypeOf(value)).pointer.is_const) *const T else *T {
     comptime {
         const VT = std.meta.Child(@TypeOf(value));
 

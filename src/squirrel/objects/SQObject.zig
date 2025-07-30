@@ -77,8 +77,8 @@ pub const SQObject = extern struct {
         }
     }
 
-    pub fn downCast(T: type, val: anytype) if(@typeInfo(@TypeOf(val)).pointer.is_const) *const T else *T {
-        return abi.downCast(T, abi.squirrel_object_hierarchy, val);
+    pub fn upcast(T: type, val: anytype) if(@typeInfo(@TypeOf(val)).pointer.is_const) *const T else *T {
+        return abi.upcast(T, abi.squirrel_object_hierarchy, val);
     }
 
     pub const SQObjectType = packed struct(u32) {
