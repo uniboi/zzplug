@@ -5,7 +5,7 @@ pub const SQCollectable = extern struct {
     _prev: ?*SQCollectable,
     _shared_state: *sq.SQSharedState,
 
-    pub fn format(self: SQCollectable, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(self: SQCollectable, writer: *std.Io.Writer) !void {
         _ = try writer.print("SQCollectable{ next: {?*}, prev: {?*}, SQRefCounted: {}", .{ self._next, self._prev, sq.SQObject.downCast(sq.SQRefCounted, self) });
     }
 

@@ -36,11 +36,11 @@ pub const SQStructInstance = opaque {
         return @as(*[56]u8, @ptrFromInt(@intFromPtr(instance) + data_offset + (@sizeOf(sq.SQObject) * size)));
     }
 
-    pub fn format(instance: *SQStructInstance, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(instance: *SQStructInstance, writer: *std.Io.Writer) !void {
         _ = try writer.write("SQStructInstance{ ");
 
         for (0.., instance.fields()) |i, *field| {
-            try writer.print("{}", .{field});
+            try writer.print("{f}", .{field});
 
             if (i + 1 < instance.fields().len) {
                 _ = try writer.write(", ");

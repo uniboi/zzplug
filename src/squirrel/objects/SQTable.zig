@@ -15,12 +15,12 @@ pub const SQTable = extern struct {
         return table.nodes[0..table.numofnodes];
     }
 
-    pub fn format(table: *SQTable, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(table: *SQTable, writer: *std.Io.Writer) !void {
         _ = try writer.write("SQTable{");
 
         var iter: Iterator = .{ .table = table };
         while (iter.next()) |node| {
-            try writer.print(" [{}] = {}", .{ node.key, node.val });
+            try writer.print(" [{f}] = {f}", .{ node.key, node.val });
             if (node.next != null) {
                 _ = try writer.write(", ");
             }

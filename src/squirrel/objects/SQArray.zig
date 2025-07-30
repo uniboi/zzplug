@@ -3,11 +3,11 @@ pub const SQArray = extern struct {
     SQCollectable: abi.Inherit(sq.SQCollectable),
     values: sq.Vector(sq.SQObject),
 
-    pub fn format(array: *SQArray, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(array: *SQArray, writer: *std.Io.Writer) !void {
         _ = try writer.write("SQArray{ ");
 
         for (0.., array.values.slice()) |i, *item| {
-            try writer.print("{}", .{item});
+            try writer.print("{f}", .{item});
 
             if (i + 1 < array.values._size) {
                 _ = try writer.write(", ");

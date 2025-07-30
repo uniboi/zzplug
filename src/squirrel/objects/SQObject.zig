@@ -62,17 +62,17 @@ pub const SQObject = extern struct {
         return self;
     }
 
-    pub fn format(self: SQObject, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(self: SQObject, writer: *std.Io.Writer) !void {
         switch (self.type) {
             .integer => try writer.print("SQInteger{{ {} }}", .{self.val.integer.value}),
             .float => try writer.print("SQFloat{{ {d} }}", .{self.val.float.value}),
             .bool => try writer.print("SQBool{{ {} }}", .{self.val.bool.value}),
             .vector => try writer.print("Vector3{{ < {d}, {d}, {d} > }}", .{ self.val.vec.x, self.val.vec.y, self.val.vec.z }),
-            .weakref => try writer.print("SQWeakRef{{ {} }}", .{self.val.weakref.value.obj}),
-            .struct_instance => try writer.print("{}", .{self.value(.struct_instance)}),
-            .table => try writer.print("{}", .{self.value(.table)}),
-            .array => try writer.print("{}", .{self.value(.array)}),
-            .string => try writer.print("{}", .{self.value(.string)}),
+            .weakref => try writer.print("SQWeakRef{{ {f} }}", .{self.val.weakref.value.obj}),
+            .struct_instance => try writer.print("{f}", .{self.value(.struct_instance)}),
+            .table => try writer.print("{f}", .{self.value(.table)}),
+            .array => try writer.print("{f}", .{self.value(.array)}),
+            .string => try writer.print("{f}", .{self.value(.string)}),
             else => try writer.print("SQObject{{ {} }}", .{self.val.ptr.value}),
         }
     }

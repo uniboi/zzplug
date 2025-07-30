@@ -32,7 +32,7 @@ pub const SQString = opaque {
 
         return d[0..length];
     }
-    pub fn format(self: *SQString, comptime _: []const u8, _: std.fmt.FormatOptions, writer: anytype) !void {
+    pub fn format(self: *SQString, writer: *std.Io.Writer) !void {
         try writer.print("SQString{{ {s} }}", .{self.data()});
     }
 };
