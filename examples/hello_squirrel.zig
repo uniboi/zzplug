@@ -2,7 +2,7 @@
 //! Try it out with `script print(Increment(1))` in the MP lobby (requires sv_cheats)
 //! This example shows the basics of squirrel objects and nativeclosures
 
-fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.C) void {}
+fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.c) void {}
 
 fn onSqvmCreated(_: *const PluginCallbacks.Instance, c_sqvm: *sq.C_SQVM) callconv(.c) void {
     // onSqvmCreated is called for every SQVM, regardless of origin
