@@ -6,37 +6,34 @@ pub fn build(b: *std.Build) void {
         .cpu_model = .baseline,
         .os_tag = .windows,
     });
-    const optimize = b.standardOptimizeOption(.{});
 
-    const zzplug = b.addModule("zzplug", .{ .root_source_file = b.path("./src/zzplug.zig") });
+    const zzplug = b.addModule("zzplug", .{
+        .root_source_file = b.path("./src/zzplug.zig"),
+        .target = target,
+    });
 
     const lib_unit_tests = b.addTest(.{
-        .root_source_file = b.path("src/zzplug.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = zzplug,
     });
 
     const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_lib_unit_tests.step);
 
-    addDocs(b, target, optimize);
+    addDocs(b, zzplug);
 
-    addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target, optimize);
-    addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target, optimize);
-    addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target, optimize);
+    addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target);
+    addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target);
+    addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target);
 }
 
 fn addDocs(
     b: *std.Build,
-    target: std.Build.ResolvedTarget,
-    optimize: std.builtin.OptimizeMode,
+    root_module: *std.Build.Module,
 ) void {
-    const shared_lib = b.addSharedLibrary(.{
+    const shared_lib = b.addLibrary(.{
         .name = "zzplug",
-        .root_source_file = b.path("src/zzplug.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = root_module,
     });
 
     const docs_step = b.step("docs", "Emit documentation");
@@ -54,13 +51,13 @@ fn addExample(
     comptime description: []const u8,
     zzplug: *std.Build.Module,
     target: std.Build.ResolvedTarget,
-    optimize: std.builtin.OptimizeMode,
 ) void {
-    const example = b.addSharedLibrary(.{
+    const example_module = b.addModule("zzplug", .{ .root_source_file = b.path("examples/" ++ name ++ ".zig"), .target = target });
+
+    const example = b.addLibrary(.{
         .name = name ++ "_example",
-        .root_source_file = b.path("examples/" ++ name ++ ".zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = example_module,
+        .linkage = .dynamic,
     });
     example.root_module.addImport("zzplug", zzplug);
 

@@ -76,7 +76,7 @@ pub fn PluginId(config: PluginConfig) type {
             _,
         };
 
-        pub fn getString(_: *const @This(), kind: StringKind) callconv(.C) ?[*:0]const u8 {
+        pub fn getString(_: *const @This(), kind: StringKind) callconv(.c) ?[*:0]const u8 {
             return switch (kind) {
                 .name => config.name,
                 .log_name => config.log_name,
@@ -95,7 +95,7 @@ pub fn PluginId(config: PluginConfig) type {
             _,
         };
 
-        pub fn getField(_: *const @This(), kind: FieldKind) callconv(.C) c_longlong {
+        pub fn getField(_: *const @This(), kind: FieldKind) callconv(.c) c_longlong {
             return switch (kind) {
                 .context => @bitCast(config.context),
                 .color => @bitCast(config.log_color),
@@ -116,40 +116,40 @@ pub const PluginCallbacks = extern struct {
     /// Called after this plugin has been loaded and validated by Northstar.
     ///
     /// At this point in time no game systems (for example any squirrel VM) have been initialized
-    init: *const fn (*const Instance, ns_handle: HMODULE, init_data: *const InitData, reloaded: bool) callconv(.C) void,
+    init: *const fn (*const Instance, ns_handle: HMODULE, init_data: *const InitData, reloaded: bool) callconv(.c) void,
 
     /// Called after all plugins have been initialized
-    finalize: *const fn (*const Instance) callconv(.C) void = finalizeStub,
+    finalize: *const fn (*const Instance) callconv(.c) void = finalizeStub,
 
     /// Called before this plugin will get unloaded by Northstar.
     ///
     /// The plugin will only get unloaded if `true` is returned.
     ///
     /// Destroy all state used by the plugin here.
-    unload: *const fn (*const Instance) callconv(.C) bool = unloadStub,
+    unload: *const fn (*const Instance) callconv(.c) bool = unloadStub,
 
     /// Called after a sqvm has been created
-    on_sqvm_created: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.C) void = onSqvmCreatedStub,
+    on_sqvm_created: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.c) void = onSqvmCreatedStub,
 
     /// Called right before a sqvm is being destroyed
-    on_sqvm_destroying: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.C) void = onSqvmDestroyingStub,
+    on_sqvm_destroying: *const fn (*const Instance, sqvm: *sq.C_SQVM) callconv(.c) void = onSqvmDestroyingStub,
 
     /// Called after any dll has been loaded by the game process.
     ///
     /// This includes other plugins, dependencies used by northstar and modules loaded by the game.
-    on_library_loaded: *const fn (*const Instance, module: HMODULE, library_name: ?[*:0]const u8) callconv(.C) void = onLibraryLoadedStub,
+    on_library_loaded: *const fn (*const Instance, module: HMODULE, library_name: ?[*:0]const u8) callconv(.c) void = onLibraryLoadedStub,
 
     /// Called every game frame
-    run_frame: *const fn (*const Instance) callconv(.C) void = runFrameStub,
+    run_frame: *const fn (*const Instance) callconv(.c) void = runFrameStub,
 
-    fn finalizeStub(_: *const Instance) callconv(.C) void {}
-    fn unloadStub(_: *const Instance) callconv(.C) bool {
+    fn finalizeStub(_: *const Instance) callconv(.c) void {}
+    fn unloadStub(_: *const Instance) callconv(.c) bool {
         return false;
     }
-    fn onSqvmCreatedStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
-    fn onSqvmDestroyingStub(_: *const Instance, _: *sq.C_SQVM) callconv(.C) void {}
-    fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const u8) callconv(.C) void {}
-    fn runFrameStub(_: *const Instance) callconv(.C) void {}
+    fn onSqvmCreatedStub(_: *const Instance, _: *sq.C_SQVM) callconv(.c) void {}
+    fn onSqvmDestroyingStub(_: *const Instance, _: *sq.C_SQVM) callconv(.c) void {}
+    fn onLibraryLoadedStub(_: *const Instance, _: HMODULE, _: ?[*:0]const u8) callconv(.c) void {}
+    fn runFrameStub(_: *const Instance) callconv(.c) void {}
 };
 
 pub const NsSys = @import("interfaces/NsSys.zig").NsSys;

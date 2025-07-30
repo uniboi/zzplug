@@ -1,7 +1,7 @@
 //! A small plugin that logs "Hello World" in the console immediately after starting the game. That's it
 
 // this callback is called by northstar when the plugin module has been loaded
-fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.C) void {
+fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.c) void {
     zzplug.modules.northstar.log(.info, "Hello World");
 }
 

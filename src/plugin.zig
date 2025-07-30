@@ -79,7 +79,7 @@ pub fn Plugin(
     const I = struct {
         /// Create an interface instance based on an identifier that includes name and version
         /// Newer versions of an interface are compatible with older versions
-        pub fn createInterface(name: [*:0]const u8, maybe_status: ?*InterfaceStatus) callconv(.C) ?*anyopaque {
+        pub fn createInterface(name: [*:0]const u8, maybe_status: ?*InterfaceStatus) callconv(.c) ?*anyopaque {
             const len = std.mem.len(name);
             const name_slice = name[0..len];
 
