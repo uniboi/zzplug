@@ -15,7 +15,21 @@ pub fn assertInheritance(comptime Child: type, comptime Parent: type) void {
 }
 
 pub fn assertSize(comptime T: type, comptime size: comptime_int) void {
-    if (@sizeOf(T) != size) @compileError(std.fmt.comptimePrint("Size of {s} does not fit. Expected {d}, got {d}.", .{ @typeName(T), size, @sizeOf(T) }));
+    if (@sizeOf(T) != size) @compileError(
+        std.fmt.comptimePrint(
+            "Size of {s} does not fit. Expected {d}, got {d}.",
+            .{ @typeName(T), size, @sizeOf(T) },
+        ),
+    );
+}
+
+pub fn assertOffset(comptime T: type, comptime field: []const u8, offset: usize) void {
+    if (@offsetOf(T, field) != offset) @compileError(
+        std.fmt.comptimePrint(
+            "Offset {s}.{s} is incorrect. Expected {2d} (0x{2X}), got {3d} (0x{3X})",
+            .{ @typeName(T), field, offset, @offsetOf(T, field)},
+        ),
+    );
 }
 
 pub fn Inherit(T: type) type {
@@ -41,7 +55,7 @@ pub fn Inherit(T: type) type {
     });
 }
 
-pub fn upcast(T: type, hierarchy: Tree(type), value: anytype) if(@typeInfo(@TypeOf(value)).pointer.is_const) *const T else *T {
+pub fn upcast(T: type, hierarchy: Tree(type), value: anytype) if (@typeInfo(@TypeOf(value)).pointer.is_const) *const T else *T {
     comptime {
         const VT = std.meta.Child(@TypeOf(value));
 
