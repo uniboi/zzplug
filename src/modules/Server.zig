@@ -1,3 +1,5 @@
+module: *Module,
+
 CSQVM_RegisterFunction: *const fn (*sq.C_SQVM, *const sq.SQFunctionRegistration, usize) callconv(.c) void,
 GetActivityNameByIndex: *const fn (index: i16) [*:0]const u8,
 
@@ -14,6 +16,8 @@ entity_type: [*:0]const u8,
 
 pub fn init(module: *Module) Server {
     return .{
+        .module = module,
+
         .CSQVM_RegisterFunction = @ptrCast(module.offset(0x1DD10)),
         .GetActivityNameByIndex = @ptrCast(module.offset(0x8d510)),
 

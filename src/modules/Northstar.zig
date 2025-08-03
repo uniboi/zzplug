@@ -1,3 +1,5 @@
+module: *abi.Module,
+
 sys: *const ifaces.NsSys,
 createInterface: ifaces.CreateInterfacePtr,
 init_data: *const ifaces.PluginCallbacks.InitData,
@@ -7,6 +9,7 @@ pub fn init(module: *abi.Module, id: *const ifaces.PluginCallbacks.InitData) Nor
     const sys: *const ifaces.NsSys = @alignCast(@ptrCast(createInterface("NSSys001", null)));
 
     return .{
+        .module = module,
         .createInterface = createInterface,
         .sys = sys,
         .init_data = id,

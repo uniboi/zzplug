@@ -1,7 +1,9 @@
+module: *Module,
 g_pMemAllocSingleton: *types.mem.CStdMemAlloc = undefined,
 
 pub fn init(module: *Module) Tier0 {
     return .{
+        .module = module,
         .g_pMemAllocSingleton = @as(**types.mem.CStdMemAlloc, @ptrCast(@alignCast(std.os.windows.kernel32.GetProcAddress(module.handle(), "g_pMemAllocSingleton")))).*,
     };
 }
