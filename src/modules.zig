@@ -2,6 +2,7 @@ pub const Server = @import("modules/Server.zig");
 pub const Client = @import("modules/Client.zig");
 pub const Northstar = @import("modules/Northstar.zig");
 pub const Tier0 = @import("modules/Tier0.zig");
+const interfaces = @import("interfaces.zig");
 
 /// Global instance of the server address collection.
 /// Initialized after server.dll is loaded.
@@ -34,8 +35,8 @@ pub fn initClient(client_module: *abi.Module) void {
     client = .init(client_module);
 }
 
-pub fn initNorthstar(ns_module: *abi.Module) void {
-    northstar = .init(ns_module);
+pub fn initNorthstar(ns_module: *abi.Module, id: *const interfaces.PluginCallbacks.InitData) void {
+    northstar = .init(ns_module, id);
 }
 
 pub fn initTier0(tier0_module: *abi.Module) void {

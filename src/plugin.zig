@@ -19,7 +19,7 @@ pub fn Plugin(
 
     const Proxies = struct {
         pub fn init(instance: *const PluginCallbacks.Instance, ns_module: std.os.windows.HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.c) void {
-            modules.initNorthstar(.fromHandle(ns_module));
+            modules.initNorthstar(.fromHandle(ns_module), init_data);
 
             const tier0 = GetModuleHandleA("tier0.dll");
             if (tier0) |module| {
