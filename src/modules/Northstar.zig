@@ -2,7 +2,7 @@ module: *abi.Module,
 
 sys: *const ifaces.NsSys,
 createInterface: ifaces.CreateInterfacePtr,
-init_data: *const ifaces.PluginCallbacks.InitData,
+init_data: ifaces.PluginCallbacks.InitData,
 
 pub fn init(module: *abi.Module, id: *const ifaces.PluginCallbacks.InitData) Northstar {
     const createInterface: ifaces.CreateInterfacePtr = @ptrCast(std.os.windows.kernel32.GetProcAddress(module.handle(), "CreateInterface"));
@@ -12,7 +12,7 @@ pub fn init(module: *abi.Module, id: *const ifaces.PluginCallbacks.InitData) Nor
         .module = module,
         .createInterface = createInterface,
         .sys = sys,
-        .init_data = id,
+        .init_data = id.*,
     };
 }
 
