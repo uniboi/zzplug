@@ -4,7 +4,7 @@ pub const abi = @import("abi.zig");
 pub const modules = @import("modules.zig");
 pub const squirrel = @import("squirrel.zig");
 pub const math = @import("math.zig");
-pub const vsource = @import("vsource.zig");
+pub const valve = @import("valve.zig");
 
 const std = @import("std");
 

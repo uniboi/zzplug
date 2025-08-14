@@ -74,7 +74,7 @@ pub const Player_OperatorData = extern struct {
 };
 
 const std = @import("std");
-const valve = @import("../../../vsource.zig");
+const valve = @import("../../../valve.zig");
 const abi = @import("../../../abi.zig");
 const m = @import("../../../math/vector.zig");
 const server = @import("../server.zig");
