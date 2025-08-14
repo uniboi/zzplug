@@ -34,47 +34,6 @@ pub fn assertOffset(comptime T: type, comptime field: []const u8, comptime offse
     );
 }
 
-pub fn upcast(T: type, hierarchy: Tree(type), value: anytype) if (@typeInfo(@TypeOf(value)).pointer.is_const) *const T else *T {
-    comptime {
-        const VT = std.meta.Child(@TypeOf(value));
-
-        const subtree = hierarchy.find(T) orelse @compileError(@typeName(T) ++ " does not exist in hierarchy");
-        if (subtree.find(VT) == null) @compileError(@typeName(VT) ++ " does not inherit " ++ @typeName(T));
-    }
-
-    return @ptrCast(value);
-}
-
-pub const squirrel_object_hierarchy: Tree(type) = .{
-    .value = sq.SQRefCounted,
-    .children = &.{
-        .{ .value = sq.SQWeakRef },
-        .{ .value = sq.SQString },
-        .{ .value = sq.SQFunctionProto },
-        .{ .value = sq.SQFunctionProtoUnimplemented },
-        .{
-            .value = sq.SQCollectable,
-            .children = &.{
-                .{ .value = sq.SQClosure },
-                .{ .value = sq.SQFunctionProto },
-                .{ .value = sq.SQArray },
-                .{ .value = sq.SQStructInstance },
-                .{ .value = sq.SQStructDef },
-                .{ .value = sq.SQClass },
-                .{ .value = sq.SQNativeClosure },
-                .{ .value = sq.SQVM },
-                .{
-                    .value = sq.SQDelegable,
-                    .children = &.{
-                        .{ .value = sq.SQTable },
-                        .{ .value = sq.SQInstance },
-                    },
-                },
-            },
-        },
-    },
-};
-
 pub const Module = @import("abi/module.zig").Module;
 /// describes padding or an unknown type with a known size
 pub const @"undefined" = u8;
@@ -82,5 +41,3 @@ pub const @"undefined" = u8;
 pub const IllegalPointer = *opaque {};
 
 const std = @import("std");
-const Tree = @import("abi/tree.zig").Tree;
-const sq = @import("squirrel.zig");
