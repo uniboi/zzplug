@@ -9,3 +9,6 @@ pub const ModelName = [*:0]u8;
 pub const ModelIndex = enum(i32) { invalid = -1, _ };
 
 pub const edict_t = [0x68]u8;
+
+pub const tier1 = @import("./valve/tier1.zig");
+
