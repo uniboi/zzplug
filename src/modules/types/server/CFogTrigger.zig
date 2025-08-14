@@ -1,6 +1,6 @@
 pub const CFogTrigger = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_fog: server.fogparams_t, // +0xc60 size: 0x50 (0x1 * 0x50) type 10
 

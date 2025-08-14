@@ -1,6 +1,6 @@
 pub const CRulePointEntity = extern struct {
     vtable: *anyopaque,
-    CRuleEntity: abi.Inherit(server.CRuleEntity),
+    CRuleEntity: abi.cpp.Inherit(server.CRuleEntity),
 
     m_Score: i32, // +0x9e8 size: 0x4 (0x1 * 0x4) type 5
 

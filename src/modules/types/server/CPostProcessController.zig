@@ -1,6 +1,6 @@
 pub const CPostProcessController = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_flPostProcessParameters: [6]f32, // +0x9e0 size: 0x18 (0x6 * 0x4) type 1
     m_bMaster: bool, // +0x9f8 size: 0x1 (0x1 * 0x1) type 6

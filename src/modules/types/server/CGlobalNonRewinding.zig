@@ -1,6 +1,6 @@
 pub const CGlobalNonRewinding = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_playerObserver: [32]server.CObserverMode, // +0x9e0 size: 0x10 (0x20 * 0x0) type 10
 

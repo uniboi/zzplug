@@ -1,6 +1,6 @@
 pub const CPhysicsSpring = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_pSpring: [8]abi.undefined, // +0x9e0 size: 0x8 (0x1 * 0x8) type 11
     m_isLocal: bool, // +0x9e8 size: 0x1 (0x1 * 0x1) type 6

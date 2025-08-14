@@ -1,6 +1,6 @@
 pub const CPredictedFirstPersonProxy = extern struct {
     vtable: *anyopaque,
-    CFirstPersonProxy: abi.Inherit(server.CFirstPersonProxy),
+    CFirstPersonProxy: abi.cpp.Inherit(server.CFirstPersonProxy),
 
     m_viewOriginCorrection: m.Vector3, // +0xee0 size: 0xc (0x1 * 0xc) type 3
     m_viewAnglesCorrection: m.Vector3, // +0xeec size: 0xc (0x1 * 0xc) type 3

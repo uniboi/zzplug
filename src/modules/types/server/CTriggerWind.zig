@@ -1,6 +1,6 @@
 pub const CTriggerWind = extern struct {
     vtable: *anyopaque,
-    CBaseVPhysicsTrigger: abi.Inherit(server.CBaseVPhysicsTrigger),
+    CBaseVPhysicsTrigger: abi.cpp.Inherit(server.CBaseVPhysicsTrigger),
 
     m_nSpeedBase: i32, // +0x9f0 size: 0x4 (0x1 * 0x4) type 5
     m_nSpeedNoise: i32, // +0x9f4 size: 0x4 (0x1 * 0x4) type 5

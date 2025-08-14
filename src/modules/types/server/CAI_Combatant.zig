@@ -1,6 +1,6 @@
 pub const CAI_Combatant = extern struct {
     vtable: *anyopaque,
-    CAI_BaseActor: abi.Inherit(server.CAI_BaseActor),
+    CAI_BaseActor: abi.cpp.Inherit(server.CAI_BaseActor),
 
     m_flNextPainSoundTime: valve.time, // +0x21f0 size: 0x4 (0x1 * 0x4) type 16
     m_flNextAlertSoundTime: valve.time, // +0x21f4 size: 0x4 (0x1 * 0x4) type 16

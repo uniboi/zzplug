@@ -1,6 +1,6 @@
 pub const CTriggerRemove = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_OnRemove: [40]abi.undefined, // +0xc60 size: 0x28 (0x1 * 0x28) type 11
 

@@ -1,5 +1,5 @@
 pub const CStopwatchBase = extern struct {
-    CSimpleSimTimer: abi.Inherit(server.CSimpleSimTimer),
+    CSimpleSimTimer: abi.cpp.Inherit(server.CSimpleSimTimer),
 
     m_fIsRunning: bool, // +0x4 size: 0x1 (0x1 * 0x1) type 6
 

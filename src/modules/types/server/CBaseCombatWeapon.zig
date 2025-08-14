@@ -1,6 +1,6 @@
 pub const CBaseCombatWeapon = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     m_weaponOwner: valve.EHANDLE, // +0xeb8 size: 0x4 (0x1 * 0x4) type 13
     m_weaponOwnerPrevious: valve.EHANDLE, // +0xebc size: 0x4 (0x1 * 0x4) type 13

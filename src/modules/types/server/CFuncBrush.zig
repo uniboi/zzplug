@@ -1,6 +1,6 @@
 pub const CFuncBrush = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_iSolidity: i32, // +0x9e0 size: 0x4 (0x1 * 0x4) type 5
     m_iDisabled: i32, // +0x9e4 size: 0x4 (0x1 * 0x4) type 5

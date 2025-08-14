@@ -1,6 +1,6 @@
 pub const CAI_Enemies = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     m_playerEnemyClass: i32, // +0x10 size: 0x4 (0x1 * 0x4) type 5
     gap_14: [4]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CKeepUpright = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     IMotionEvent: *anyopaque, // +0x9e0 size: 0x8 (0x0 * 0x8) type 0
     m_worldGoalAxis: m.Vector3, // +0x9e8 size: 0xc (0x1 * 0xc) type 3

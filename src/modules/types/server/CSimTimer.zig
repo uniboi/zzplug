@@ -1,5 +1,5 @@
 pub const CSimTimer = extern struct {
-    CSimpleSimTimer: abi.Inherit(server.CSimpleSimTimer),
+    CSimpleSimTimer: abi.cpp.Inherit(server.CSimpleSimTimer),
 
     m_interval: f32, // +0x4 size: 0x4 (0x1 * 0x4) type 1
 

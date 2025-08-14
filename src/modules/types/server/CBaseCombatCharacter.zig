@@ -1,6 +1,6 @@
 pub const CBaseCombatCharacter = extern struct {
     vtable: *anyopaque,
-    CBaseAnimatingOverlay: abi.Inherit(server.CBaseAnimatingOverlay),
+    CBaseAnimatingOverlay: abi.cpp.Inherit(server.CBaseAnimatingOverlay),
 
     m_bPreventWeaponPickup: bool, // +0x1210 size: 0x1 (0x1 * 0x1) type 6
     gap_1211: [3]abi.undefined,

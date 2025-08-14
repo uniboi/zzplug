@@ -1,6 +1,6 @@
 pub const CPhysBox = extern struct {
     vtable: *anyopaque,
-    CBreakable: abi.Inherit(server.CBreakable),
+    CBreakable: abi.cpp.Inherit(server.CBreakable),
 
     m_damageType: i32, // +0xae0 size: 0x4 (0x1 * 0x4) type 5
     m_massScale: f32, // +0xae4 size: 0x4 (0x1 * 0x4) type 1

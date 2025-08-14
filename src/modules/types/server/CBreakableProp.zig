@@ -1,6 +1,6 @@
 pub const CBreakableProp = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     IBreakableWithPropData: *anyopaque, // +0xeb8 size: 0x8 (0x0 * 0x8) type 0
     m_OnBreak: [40]abi.undefined, // +0xec0 size: 0x28 (0x1 * 0x28) type 11

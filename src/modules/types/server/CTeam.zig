@@ -1,6 +1,6 @@
 pub const CTeam = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_aSpawnPoints: [32]abi.undefined, // +0x9e0 size: 0x20 (0x1 * 0x20) type 11
     m_aPlayers: [32]abi.undefined, // +0xa00 size: 0x20 (0x1 * 0x20) type 11

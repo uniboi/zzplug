@@ -1,6 +1,6 @@
 pub const CAI_BaseNPC = extern struct {
     vtable: *anyopaque,
-    CBaseCombatCharacter: abi.Inherit(server.CBaseCombatCharacter),
+    CBaseCombatCharacter: abi.cpp.Inherit(server.CBaseCombatCharacter),
 
     CAI_DefMovementSink: *anyopaque, // +0x1498 size: 0x8 (0x0 * 0x8) type 0
     IAI_BehaviorBridge: *anyopaque, // +0x14a0 size: 0x8 (0x0 * 0x8) type 0

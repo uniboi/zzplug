@@ -1,6 +1,6 @@
 pub const CSkyCamera = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_skyboxData: server.sky3dparams_t, // +0x9e0 size: 0x68 (0x1 * 0x68) type 10
     m_bUseAngles: bool, // +0xa48 size: 0x1 (0x1 * 0x1) type 6

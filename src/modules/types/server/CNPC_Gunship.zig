@@ -1,6 +1,6 @@
 pub const CNPC_Gunship = extern struct {
     vtable: *anyopaque,
-    CBaseHelicopter: abi.Inherit(server.CBaseHelicopter),
+    CBaseHelicopter: abi.cpp.Inherit(server.CBaseHelicopter),
 
     m_accel: m.Vector3, // +0x24e0 size: 0xc (0x1 * 0xc) type 3
     m_vecAttackPosition: m.Vector3, // +0x24ec size: 0xc (0x1 * 0xc) type 3

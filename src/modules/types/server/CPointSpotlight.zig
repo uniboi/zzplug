@@ -1,6 +1,6 @@
 pub const CPointSpotlight = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_bSpotlightOn: bool, // +0x9e0 size: 0x1 (0x1 * 0x1) type 6
     m_bEfficientSpotlight: bool, // +0x9e1 size: 0x1 (0x1 * 0x1) type 6

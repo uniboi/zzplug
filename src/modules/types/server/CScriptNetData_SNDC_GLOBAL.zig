@@ -1,6 +1,6 @@
 pub const CScriptNetData_SNDC_GLOBAL = extern struct {
     vtable: *anyopaque,
-    CScriptNetData: abi.Inherit(server.CScriptNetData),
+    CScriptNetData: abi.cpp.Inherit(server.CScriptNetData),
 
     m_bools: [16]bool, // +0x9e0 size: 0x10 (0x10 * 0x1) type 6
     m_ranges: [32]i16, // +0x9f0 size: 0x40 (0x20 * 0x2) type 7

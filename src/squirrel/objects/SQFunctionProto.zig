@@ -1,7 +1,7 @@
 pub const SQFunctionProto = opaque {
     pub const Head = extern struct {
         vtable: *anyopaque,
-        SQCollectable: abi.Inherit(sq.SQCollectable),
+        SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
 
         unknown_30: *anyopaque,
         _source_name: sq.SQObject,

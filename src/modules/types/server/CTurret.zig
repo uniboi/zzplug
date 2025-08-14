@@ -1,6 +1,6 @@
 pub const CTurret = extern struct {
     vtable: *anyopaque,
-    CBaseCombatCharacter: abi.Inherit(server.CBaseCombatCharacter),
+    CBaseCombatCharacter: abi.cpp.Inherit(server.CBaseCombatCharacter),
 
     m_settings: [*:0]u8, // +0x1498 size: 0x8 (0x1 * 0x8) type 2
     m_settingsIndex: i32, // +0x14a0 size: 0x4 (0x1 * 0x4) type 5

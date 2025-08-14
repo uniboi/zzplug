@@ -1,6 +1,6 @@
 pub const SQCollectable = extern struct {
     vtable: *VTable,
-    SQRefCounted: abi.Inherit(sq.SQRefCounted),
+    SQRefCounted: abi.cpp.Inherit(sq.SQRefCounted),
     _next: ?*SQCollectable,
     _prev: ?*SQCollectable,
     _shared_state: *sq.SQSharedState,

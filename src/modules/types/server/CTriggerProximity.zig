@@ -1,6 +1,6 @@
 pub const CTriggerProximity = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_hMeasureTarget: valve.EHANDLE, // +0xc60 size: 0x4 (0x1 * 0x4) type 13
     gap_c64: [4]abi.undefined,

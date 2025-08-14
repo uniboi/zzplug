@@ -1,6 +1,6 @@
 pub const CEnvSoundscape = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_OnPlay: [40]abi.undefined, // +0x9e0 size: 0x28 (0x1 * 0x28) type 11
     m_flRadius: f32, // +0xa08 size: 0x4 (0x1 * 0x4) type 1

@@ -1,6 +1,6 @@
 pub const CEnvWind = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_EnvWindShared: server.CEnvWindShared, // +0x9e0 size: 0x1c8 (0x1 * 0x1c8) type 10
 

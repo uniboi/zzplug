@@ -1,6 +1,6 @@
 pub const CNPC_Dropship = extern struct {
     vtable: *anyopaque,
-    CBaseHelicopter: abi.Inherit(server.CBaseHelicopter),
+    CBaseHelicopter: abi.cpp.Inherit(server.CBaseHelicopter),
 
     m_flTimeTakeOff: valve.time, // +0x24e0 size: 0x4 (0x1 * 0x4) type 16
     m_flTimeNextAttack: valve.time, // +0x24e4 size: 0x4 (0x1 * 0x4) type 16

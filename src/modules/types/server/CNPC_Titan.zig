@@ -1,6 +1,6 @@
 pub const CNPC_Titan = extern struct {
     vtable: *anyopaque,
-    CAI_Combatant: abi.Inherit(server.CAI_Combatant),
+    CAI_Combatant: abi.cpp.Inherit(server.CAI_Combatant),
 
     m_outOfBoundsDeadTime: valve.time, // +0x2500 size: 0x4 (0x1 * 0x4) type 16
     m_bCanVortex: bool, // +0x2504 size: 0x1 (0x1 * 0x1) type 6

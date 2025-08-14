@@ -1,6 +1,6 @@
 pub const CFirstPersonProxy = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     m_viewModelOwner: valve.EHANDLE, // +0xeb8 size: 0x4 (0x1 * 0x4) type 13
     m_lastAbsAngles: m.Vector3, // +0xebc size: 0xc (0x1 * 0xc) type 3

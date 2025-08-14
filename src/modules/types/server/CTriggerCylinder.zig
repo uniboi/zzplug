@@ -1,6 +1,6 @@
 pub const CTriggerCylinder = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_radius: f32, // +0xc60 size: 0x4 (0x1 * 0x4) type 1
     m_aboveHeight: f32, // +0xc64 size: 0x4 (0x1 * 0x4) type 1

@@ -1,6 +1,6 @@
 pub const CTitanSoul = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_titanSoulScriptNetData: valve.EHANDLE, // +0x9e0 size: 0x4 (0x1 * 0x4) type 13
     m_defensivePlacement: server.DefensivePlacement, // +0x9e4 size: 0x28 (0x1 * 0x28) type 10

@@ -1,6 +1,6 @@
 pub const CGamePlayerEquip = extern struct {
     vtable: *anyopaque,
-    CRulePointEntity: abi.Inherit(server.CRulePointEntity),
+    CRulePointEntity: abi.cpp.Inherit(server.CRulePointEntity),
 
     m_weaponNames: [32][*:0]u8, // +0x9f0 size: 0x100 (0x20 * 0x8) type 2
     m_weaponCount: [32]i32, // +0xaf0 size: 0x80 (0x20 * 0x4) type 5

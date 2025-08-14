@@ -1,6 +1,6 @@
 pub const CBaseGrenade = extern struct {
     vtable: *anyopaque,
-    CProjectile: abi.Inherit(server.CProjectile),
+    CProjectile: abi.cpp.Inherit(server.CProjectile),
 
     m_hasExploded: bool, // +0x1ca0 size: 0x1 (0x1 * 0x1) type 6
     m_doesExplode: bool, // +0x1ca1 size: 0x1 (0x1 * 0x1) type 6

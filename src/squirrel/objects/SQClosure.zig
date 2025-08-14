@@ -1,6 +1,6 @@
 pub const SQClosure = extern struct {
     vtable: *anyopaque,
-    SQCollectable: abi.Inherit(sq.SQCollectable),
+    SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
 
     _env: sq.SQObject,
     _function: sq.SQObject,

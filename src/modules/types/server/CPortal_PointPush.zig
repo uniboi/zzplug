@@ -1,6 +1,6 @@
 pub const CPortal_PointPush = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_bEnabled: bool, // +0x9e0 size: 0x1 (0x1 * 0x1) type 6
     gap_9e1: [3]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CWeaponX = extern struct {
     vtable: *anyopaque,
-    CBaseCombatWeapon: abi.Inherit(server.CBaseCombatWeapon),
+    CBaseCombatWeapon: abi.cpp.Inherit(server.CBaseCombatWeapon),
 
     m_weapState: i32, // +0xfc0 size: 0x4 (0x1 * 0x4) type 5
     m_allowedToUse: bool, // +0xfc4 size: 0x1 (0x1 * 0x1) type 6

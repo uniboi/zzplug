@@ -1,6 +1,6 @@
 pub const CTriggerViewProxy = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_hPlayer: valve.EHANDLE, // +0x9e0 size: 0x4 (0x1 * 0x4) type 13
     gap_9e4: [4]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CGameText = extern struct {
     vtable: *anyopaque,
-    CRulePointEntity: abi.Inherit(server.CRulePointEntity),
+    CRulePointEntity: abi.cpp.Inherit(server.CRulePointEntity),
 
     m_iszMessage: [*:0]u8, // +0x9f0 size: 0x8 (0x1 * 0x8) type 2
     m_textParms: server.hudtextparms_s, // +0x9f8 size: 0x28 (0x1 * 0x28) type 10

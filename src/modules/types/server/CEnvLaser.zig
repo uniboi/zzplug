@@ -1,6 +1,6 @@
 pub const CEnvLaser = extern struct {
     vtable: *anyopaque,
-    CBeam: abi.Inherit(server.CBeam),
+    CBeam: abi.cpp.Inherit(server.CBeam),
 
     m_iszLaserTarget: [*:0]u8, // +0xa88 size: 0x8 (0x1 * 0x8) type 2
     m_pSprite: *server.CBaseEntity, // +0xa90 size: 0x8 (0x1 * 0x8) type 12

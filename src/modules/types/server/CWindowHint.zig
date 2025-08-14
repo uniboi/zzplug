@@ -1,6 +1,6 @@
 pub const CWindowHint = extern struct {
     vtable: *anyopaque,
-    CGameplayHint: abi.Inherit(server.CGameplayHint),
+    CGameplayHint: abi.cpp.Inherit(server.CGameplayHint),
 
     normal: m.Vector3, // +0x9e8 size: 0xc (0x1 * 0xc) type 3
     right: m.Vector3, // +0x9f4 size: 0xc (0x1 * 0xc) type 3

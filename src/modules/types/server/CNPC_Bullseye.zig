@@ -1,6 +1,6 @@
 pub const CNPC_Bullseye = extern struct {
     vtable: *anyopaque,
-    CAI_BaseNPC: abi.Inherit(server.CAI_BaseNPC),
+    CAI_BaseNPC: abi.cpp.Inherit(server.CAI_BaseNPC),
 
     m_hPainPartner: valve.EHANDLE, // +0x20b0 size: 0x4 (0x1 * 0x4) type 13
     gap_20b4: [4]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CWindowPane = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     test {
         try std.testing.expect(@sizeOf(@This()) == 0xeb8);

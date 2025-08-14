@@ -1,6 +1,6 @@
 pub const CTriggerLook = extern struct {
     vtable: *anyopaque,
-    CTriggerMultiple: abi.Inherit(server.CTriggerMultiple),
+    CTriggerMultiple: abi.cpp.Inherit(server.CTriggerMultiple),
 
     m_hLookTarget: valve.EHANDLE, // +0xc88 size: 0x4 (0x1 * 0x4) type 13
     m_flFieldOfView: f32, // +0xc8c size: 0x4 (0x1 * 0x4) type 1

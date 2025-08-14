@@ -1,6 +1,6 @@
 pub const CPhysThruster = extern struct {
     vtable: *anyopaque,
-    CPhysForce: abi.Inherit(server.CPhysForce),
+    CPhysForce: abi.cpp.Inherit(server.CPhysForce),
 
     m_localOrigin: m.Vector3, // +0xa40 size: 0xc (0x1 * 0xc) type 3
 

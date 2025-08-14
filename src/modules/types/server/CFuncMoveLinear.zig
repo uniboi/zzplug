@@ -1,6 +1,6 @@
 pub const CFuncMoveLinear = extern struct {
     vtable: *anyopaque,
-    CBaseToggle: abi.Inherit(server.CBaseToggle),
+    CBaseToggle: abi.cpp.Inherit(server.CBaseToggle),
 
     m_vecMoveDir: m.Vector3, // +0xa60 size: 0xc (0x1 * 0xc) type 3
     gap_a6c: [4]abi.undefined,

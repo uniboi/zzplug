@@ -1,6 +1,6 @@
 pub const CTriggerHurt = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_flOriginalDamage: f32, // +0xc60 size: 0x4 (0x1 * 0x4) type 1
     m_flDamage: f32, // +0xc64 size: 0x4 (0x1 * 0x4) type 1

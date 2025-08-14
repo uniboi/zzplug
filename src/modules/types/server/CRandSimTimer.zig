@@ -1,5 +1,5 @@
 pub const CRandSimTimer = extern struct {
-    CSimpleSimTimer: abi.Inherit(server.CSimpleSimTimer),
+    CSimpleSimTimer: abi.cpp.Inherit(server.CSimpleSimTimer),
 
     m_minInterval: f32, // +0x4 size: 0x4 (0x1 * 0x4) type 1
     m_maxInterval: f32, // +0x8 size: 0x4 (0x1 * 0x4) type 1

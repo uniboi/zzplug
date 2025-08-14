@@ -1,6 +1,6 @@
 pub const CAI_BaseActor = extern struct {
     vtable: *anyopaque,
-    CAI_BaseActorBase: abi.Inherit(server.CAI_BaseActorBase),
+    CAI_BaseActorBase: abi.cpp.Inherit(server.CAI_BaseActorBase),
 
     m_flAccumYawDelta: f32, // +0x20b8 size: 0x4 (0x1 * 0x4) type 1
     m_flAccumYawScale: f32, // +0x20bc size: 0x4 (0x1 * 0x4) type 1

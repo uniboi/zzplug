@@ -1,6 +1,6 @@
 pub const CAmbientGeneric = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_soundName: valve.SoundName, // +0x9e0 size: 0x8 (0x1 * 0x8) type 19
 

@@ -1,6 +1,6 @@
 pub const CGameOperator = extern struct {
     vtable: *anyopaque,
-    CGameUI: abi.Inherit(server.CGameUI),
+    CGameUI: abi.cpp.Inherit(server.CGameUI),
 
     m_iszPrimaryDropPod: [*:0]u8, // +0x10b0 size: 0x8 (0x1 * 0x8) type 2
     m_iszSecondaryDropPod: [*:0]u8, // +0x10b8 size: 0x8 (0x1 * 0x8) type 2

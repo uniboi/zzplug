@@ -1,6 +1,6 @@
 pub const CNPC_SentryTurret = extern struct {
     vtable: *anyopaque,
-    CAI_BaseNPC: abi.Inherit(server.CAI_BaseNPC),
+    CAI_BaseNPC: abi.cpp.Inherit(server.CAI_BaseNPC),
 
     m_turretState: i32, // +0x20b0 size: 0x4 (0x1 * 0x4) type 5
     m_killCount: i32, // +0x20b4 size: 0x4 (0x1 * 0x4) type 5

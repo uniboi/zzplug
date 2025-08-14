@@ -1,6 +1,6 @@
 pub const CPhysConvert = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_OnConvert: [40]abi.undefined, // +0x9e0 size: 0x28 (0x1 * 0x28) type 11
     m_swapModel: [*:0]u8, // +0xa08 size: 0x8 (0x1 * 0x8) type 2

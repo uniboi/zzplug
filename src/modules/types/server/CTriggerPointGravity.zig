@@ -1,6 +1,6 @@
 pub const CTriggerPointGravity = extern struct {
     vtable: *anyopaque,
-    CTriggerCylinder: abi.Inherit(server.CTriggerCylinder),
+    CTriggerCylinder: abi.cpp.Inherit(server.CTriggerCylinder),
 
     m_pullOuterRadius: f32, // +0xc70 size: 0x4 (0x1 * 0x4) type 1
     m_pullInnerRadius: f32, // +0xc74 size: 0x4 (0x1 * 0x4) type 1

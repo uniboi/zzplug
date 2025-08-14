@@ -1,6 +1,6 @@
 pub const CAI_FollowBehavior = extern struct {
     vtable: *anyopaque,
-    CAI_BehaviorBase: abi.Inherit(server.CAI_BehaviorBase),
+    CAI_BehaviorBase: abi.cpp.Inherit(server.CAI_BehaviorBase),
 
     m_hFollowTarget: valve.EHANDLE, // +0x50 size: 0x4 (0x1 * 0x4) type 13
     m_FollowNavGoal: server.AI_FollowNavInfo_t, // +0x54 size: 0x28 (0x1 * 0x28) type 10

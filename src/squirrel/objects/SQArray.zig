@@ -1,6 +1,6 @@
 pub const SQArray = extern struct {
     vtable: *VTable,
-    SQCollectable: abi.Inherit(sq.SQCollectable),
+    SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
     values: sq.Vector(sq.SQObject),
 
     pub fn format(array: *SQArray, writer: *std.Io.Writer) !void {

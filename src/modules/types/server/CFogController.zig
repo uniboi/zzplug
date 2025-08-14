@@ -1,6 +1,6 @@
 pub const CFogController = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_fog: server.fogparams_t, // +0x9e0 size: 0x50 (0x1 * 0x50) type 10
     m_bUseAngles: bool, // +0xa30 size: 0x1 (0x1 * 0x1) type 6

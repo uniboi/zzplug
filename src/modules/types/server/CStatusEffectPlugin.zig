@@ -1,6 +1,6 @@
 pub const CStatusEffectPlugin = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_statusEffectsTimedPluginNV: server.StatusEffectTimedData, // +0x9e0 size: 0x18 (0x1 * 0x18) type 10
     m_statusEffectsEndlessPluginNV: server.StatusEffectEndlessData, // +0x9f8 size: 0x10 (0x1 * 0x10) type 10

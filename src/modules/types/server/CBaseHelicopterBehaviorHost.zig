@@ -1,6 +1,6 @@
 pub const CBaseHelicopterBehaviorHost = extern struct {
     vtable: *anyopaque,
-    CAI_TrackPather: abi.Inherit(server.CAI_TrackPather),
+    CAI_TrackPather: abi.cpp.Inherit(server.CAI_TrackPather),
 
     m_bCalledBehaviorSelectSchedule: bool, // +0x2190 size: 0x1 (0x1 * 0x1) type 6
 

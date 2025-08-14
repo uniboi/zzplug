@@ -1,6 +1,6 @@
 pub const CNPC_Drone = extern struct {
     vtable: *anyopaque,
-    CAI_BaseFlyingBot: abi.Inherit(server.CAI_BaseFlyingBot),
+    CAI_BaseFlyingBot: abi.cpp.Inherit(server.CAI_BaseFlyingBot),
 
     m_bAttackTarget: bool, // +0x2458 size: 0x1 (0x1 * 0x1) type 6
     gap_2459: [3]abi.undefined,

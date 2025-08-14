@@ -1,6 +1,6 @@
 pub const CNPC_Flyer = extern struct {
     vtable: *anyopaque,
-    CAI_BaseFlyingBot: abi.Inherit(server.CAI_BaseFlyingBot),
+    CAI_BaseFlyingBot: abi.cpp.Inherit(server.CAI_BaseFlyingBot),
 
     m_onGround: bool, // +0x2458 size: 0x1 (0x1 * 0x1) type 6
 

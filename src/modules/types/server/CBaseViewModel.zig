@@ -1,6 +1,6 @@
 pub const CBaseViewModel = extern struct {
     vtable: *anyopaque,
-    CBaseAnimatingOverlay: abi.Inherit(server.CBaseAnimatingOverlay),
+    CBaseAnimatingOverlay: abi.cpp.Inherit(server.CBaseAnimatingOverlay),
 
     m_viewModelOwner: valve.EHANDLE, // +0x1210 size: 0x4 (0x1 * 0x4) type 13
     m_viewModelActivity: i32, // +0x1214 size: 0x4 (0x1 * 0x4) type 5

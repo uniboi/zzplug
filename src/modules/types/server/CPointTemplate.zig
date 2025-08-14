@@ -1,6 +1,6 @@
 pub const CPointTemplate = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_iszTemplateEntityNames_0_: [*:0]u8, // +0x9e0 size: 0x8 (0x1 * 0x8) type 2
     m_iszTemplateEntityNames_1_: [*:0]u8, // +0x9e8 size: 0x8 (0x1 * 0x8) type 2

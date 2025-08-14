@@ -1,6 +1,6 @@
 pub const CNPC_Soldier = extern struct {
     vtable: *anyopaque,
-    CAI_Combatant: abi.Inherit(server.CAI_Combatant),
+    CAI_Combatant: abi.cpp.Inherit(server.CAI_Combatant),
 
     m_lastRunAwayCheckTime: f32, // +0x2500 size: 0x4 (0x1 * 0x4) type 1
     m_burstsBeforeRunAway: u8, // +0x2504 size: 0x1 (0x1 * 0x1) type 8

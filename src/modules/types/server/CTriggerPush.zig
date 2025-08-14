@@ -1,6 +1,6 @@
 pub const CTriggerPush = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_vecPushDir: m.Vector3, // +0xc60 size: 0xc (0x1 * 0xc) type 3
     m_flAlternateTicksFix: f32, // +0xc6c size: 0x4 (0x1 * 0x4) type 1

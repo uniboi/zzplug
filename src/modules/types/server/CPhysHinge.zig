@@ -1,6 +1,6 @@
 pub const CPhysHinge = extern struct {
     vtable: *anyopaque,
-    CPhysConstraint: abi.Inherit(server.CPhysConstraint),
+    CPhysConstraint: abi.cpp.Inherit(server.CPhysConstraint),
 
     m_hinge: server.constraint_hingeparams_t, // +0xa40 size: 0x40 (0x1 * 0x40) type 10
     m_hingeFriction: f32, // +0xa80 size: 0x4 (0x1 * 0x4) type 1

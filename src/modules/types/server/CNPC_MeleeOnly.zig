@@ -1,6 +1,6 @@
 pub const CNPC_MeleeOnly = extern struct {
     vtable: *anyopaque,
-    CAI_BaseActor: abi.Inherit(server.CAI_BaseActor),
+    CAI_BaseActor: abi.cpp.Inherit(server.CAI_BaseActor),
 
     m_AssaultBehavior: server.CAI_AssaultBehavior, // +0x21f0 size: 0xe8 (0x1 * 0xe8) type 10
     m_FollowBehavior: server.CAI_FollowBehavior, // +0x22d8 size: 0x148 (0x1 * 0x148) type 10

@@ -1,6 +1,6 @@
 pub const CAI_ChangeTarget = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_iszNewTarget: [*:0]u8, // +0x9e0 size: 0x8 (0x1 * 0x8) type 2
 

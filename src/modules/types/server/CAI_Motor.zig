@@ -1,6 +1,6 @@
 pub const CAI_Motor = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     CAI_ProxyMovementSink: [16]abi.undefined, // +0x10 size: 0x10 (0x0 * 0x10) type 0
     m_steerDirection: m.Vector3, // +0x20 size: 0xc (0x1 * 0xc) type 3

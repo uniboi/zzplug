@@ -1,6 +1,6 @@
 pub const CGameGibManager = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_LRU: [48]abi.undefined, // +0x9e0 size: 0x30 (0x1 * 0x30) type 0
     m_bAllowNewGibs: bool, // +0xa10 size: 0x1 (0x1 * 0x1) type 6

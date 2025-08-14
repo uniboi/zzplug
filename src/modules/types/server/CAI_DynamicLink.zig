@@ -1,6 +1,6 @@
 pub const CAI_DynamicLink = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_pNextDynamicLink: *anyopaque, // +0x9e0 size: 0x8 (0x1 * 0x8) type 31
     m_nSrcEditID: i32, // +0x9e8 size: 0x4 (0x1 * 0x4) type 5

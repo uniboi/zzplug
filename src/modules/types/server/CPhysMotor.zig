@@ -1,6 +1,6 @@
 pub const CPhysMotor = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_nameAttach: [*:0]u8, // +0x9e0 size: 0x8 (0x1 * 0x8) type 2
     m_attachedObject: valve.EHANDLE, // +0x9e8 size: 0x4 (0x1 * 0x4) type 13

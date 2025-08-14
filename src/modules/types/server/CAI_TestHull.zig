@@ -1,6 +1,6 @@
 pub const CAI_TestHull = extern struct {
     vtable: *anyopaque,
-    CAI_BaseNPC: abi.Inherit(server.CAI_BaseNPC),
+    CAI_BaseNPC: abi.cpp.Inherit(server.CAI_BaseNPC),
 
     bInUse: bool, // +0x20b0 size: 0x1 (0x1 * 0x1) type 6
 

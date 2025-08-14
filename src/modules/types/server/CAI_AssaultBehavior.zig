@@ -1,6 +1,6 @@
 pub const CAI_AssaultBehavior = extern struct {
     vtable: *anyopaque,
-    CAI_BehaviorBase: abi.Inherit(server.CAI_BehaviorBase),
+    CAI_BehaviorBase: abi.cpp.Inherit(server.CAI_BehaviorBase),
 
     m_assaultGroundRelativePos: m.Vector3, // +0x50 size: 0xc (0x1 * 0xc) type 3
     m_assaultMovingGroundEnt: valve.EHANDLE, // +0x5c size: 0x4 (0x1 * 0x4) type 13

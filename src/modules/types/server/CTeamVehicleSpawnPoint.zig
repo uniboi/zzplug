@@ -1,6 +1,6 @@
 pub const CTeamVehicleSpawnPoint = extern struct {
     vtable: *anyopaque,
-    CTeamSpawnPoint: abi.Inherit(server.CTeamSpawnPoint),
+    CTeamSpawnPoint: abi.cpp.Inherit(server.CTeamSpawnPoint),
 
     m_OnVehicleSpawn: [40]abi.undefined, // +0xff0 size: 0x28 (0x1 * 0x28) type 11
 

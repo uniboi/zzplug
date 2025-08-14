@@ -1,7 +1,7 @@
 pub const SQString = opaque {
     pub const Head = extern struct {
         vtable: *VTable,
-        SQRefCounted: abi.Inherit(sq.SQRefCounted),
+        SQRefCounted: abi.cpp.Inherit(sq.SQRefCounted),
 
         shared_state: *sq.SQSharedState,
         length: sq.SQUnsignedInteger,

@@ -1,6 +1,6 @@
 pub const CServerNetworkProperty = extern struct {
     vtable: *anyopaque,
-    IServerNetworkable: abi.Inherit(server.IServerNetworkable),
+    IServerNetworkable: abi.cpp.Inherit(server.IServerNetworkable),
 
     m_hParent: valve.EHANDLE, // +0x20 size: 0x4 (0x1 * 0x4) type 13
 

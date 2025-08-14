@@ -1,6 +1,6 @@
 pub const CItem = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     m_bActivateWhenAtRest: bool, // +0xeb8 size: 0x1 (0x1 * 0x1) type 6
     gap_eb9: [7]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CAI_Hint = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_NodeData: server.HintNodeData, // +0x9e0 size: 0x50 (0x1 * 0x50) type 10
     m_hintMovingGroundEnt: valve.EHANDLE, // +0xa30 size: 0x4 (0x1 * 0x4) type 13

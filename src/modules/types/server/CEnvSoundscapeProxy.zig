@@ -1,6 +1,6 @@
 pub const CEnvSoundscapeProxy = extern struct {
     vtable: *anyopaque,
-    CEnvSoundscape: abi.Inherit(server.CEnvSoundscape),
+    CEnvSoundscape: abi.cpp.Inherit(server.CEnvSoundscape),
 
     m_MainSoundscapeName: [*:0]u8, // +0xa68 size: 0x8 (0x1 * 0x8) type 2
 

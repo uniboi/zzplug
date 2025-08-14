@@ -1,6 +1,6 @@
 pub const CMissile = extern struct {
     vtable: *anyopaque,
-    CProjectile: abi.Inherit(server.CProjectile),
+    CProjectile: abi.cpp.Inherit(server.CProjectile),
 
     m_flAugerTime: valve.time, // +0x1ca0 size: 0x4 (0x1 * 0x4) type 16
     m_flMarkDeadTime: valve.time, // +0x1ca4 size: 0x4 (0x1 * 0x4) type 16

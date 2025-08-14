@@ -1,6 +1,6 @@
 pub const CDynamicProp = extern struct {
     vtable: *anyopaque,
-    CBreakableProp: abi.Inherit(server.CBreakableProp),
+    CBreakableProp: abi.cpp.Inherit(server.CBreakableProp),
 
     IPositionWatcher: *anyopaque, // +0xfc0 size: 0x8 (0x0 * 0x8) type 0
     m_OnPlayerUse: [40]abi.undefined, // +0xfc8 size: 0x28 (0x1 * 0x28) type 11

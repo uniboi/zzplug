@@ -1,6 +1,6 @@
 pub const CScriptNetData_SNDC_TITAN_SOUL = extern struct {
     vtable: *anyopaque,
-    CScriptNetData: abi.Inherit(server.CScriptNetData),
+    CScriptNetData: abi.cpp.Inherit(server.CScriptNetData),
 
     m_bools: [8]bool, // +0x9e0 size: 0x8 (0x8 * 0x1) type 6
     m_ranges: [16]i16, // +0x9e8 size: 0x20 (0x10 * 0x2) type 7

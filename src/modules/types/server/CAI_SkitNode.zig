@@ -1,6 +1,6 @@
 pub const CAI_SkitNode = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_distanceFromRef: f32, // +0x9e0 size: 0x4 (0x1 * 0x4) type 1
     m_reserved: bool, // +0x9e4 size: 0x1 (0x1 * 0x1) type 6

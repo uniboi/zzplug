@@ -1,6 +1,6 @@
 pub const CAI_BehaviorBase = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     IAI_BehaviorBridge: *anyopaque, // +0x10 size: 0x8 (0x0 * 0x8) type 0
     m_ScheduleChannels: [32]abi.undefined, // +0x18 size: 0x20 (0x1 * 0x20) type 11

@@ -1,6 +1,6 @@
 pub const CPhysPulley = extern struct {
     vtable: *anyopaque,
-    CPhysConstraint: abi.Inherit(server.CPhysConstraint),
+    CPhysConstraint: abi.cpp.Inherit(server.CPhysConstraint),
 
     m_position2: m.Vector3, // +0xa40 size: 0xc (0x1 * 0xc) type 15
     m_offset: [2]m.Vector3, // +0xa4c size: 0x18 (0x2 * 0xc) type 3

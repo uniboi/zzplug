@@ -1,6 +1,6 @@
 pub const SQDelegable = extern struct {
     vtable: *VTable,
-    SQCollectable: abi.Inherit(sq.SQCollectable),
+    SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
     _delegate: *sq.SQTable,
 
     pub const VTable = extern struct {

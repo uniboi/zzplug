@@ -1,6 +1,6 @@
 pub const CWallrunCurve = extern struct {
     vtable: *anyopaque,
-    CGameplayHint: abi.Inherit(server.CGameplayHint),
+    CGameplayHint: abi.cpp.Inherit(server.CGameplayHint),
 
     width: i32, // +0x9e8 size: 0x4 (0x1 * 0x4) type 5
     height: i32, // +0x9ec size: 0x4 (0x1 * 0x4) type 5

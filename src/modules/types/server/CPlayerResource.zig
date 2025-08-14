@@ -1,6 +1,6 @@
 pub const CPlayerResource = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_iPing: [33]i32, // +0x9e0 size: 0x84 (0x21 * 0x4) type 5
     m_iTeam: [33]i32, // +0xa64 size: 0x84 (0x21 * 0x4) type 5

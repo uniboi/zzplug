@@ -1,6 +1,6 @@
 pub const CBaseTrigger = extern struct {
     vtable: *anyopaque,
-    CBaseToggle: abi.Inherit(server.CBaseToggle),
+    CBaseToggle: abi.cpp.Inherit(server.CBaseToggle),
 
     m_bDisabled: bool, // +0xa60 size: 0x1 (0x1 * 0x1) type 6
     gap_a61: [7]abi.undefined,

@@ -1,6 +1,6 @@
 pub const CAI_Navigator = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     CAI_DefMovementSink: *anyopaque, // +0x10 size: 0x8 (0x0 * 0x8) type 0
     m_navType: i32, // +0x18 size: 0x4 (0x1 * 0x4) type 5

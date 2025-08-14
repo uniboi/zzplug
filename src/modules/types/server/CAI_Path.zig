@@ -1,6 +1,6 @@
 pub const CAI_Path = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     m_Waypoints: *anyopaque, // +0x10 size: 0x8 (0x1 * 0x8) type 0
     m_clusterPath: [32]abi.undefined, // +0x18 size: 0x20 (0x1 * 0x20) type 0

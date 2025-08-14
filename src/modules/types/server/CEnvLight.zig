@@ -1,6 +1,6 @@
 pub const CEnvLight = extern struct {
     vtable: *anyopaque,
-    CLight: abi.Inherit(server.CLight),
+    CLight: abi.cpp.Inherit(server.CLight),
 
     hasCloudMask: bool, // +0x9f8 size: 0x1 (0x1 * 0x1) type 6
 

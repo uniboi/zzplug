@@ -1,6 +1,6 @@
 pub const CDynamicLight = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_ActualFlags: u8, // +0x9e0 size: 0x1 (0x1 * 0x1) type 8
     m_Flags: u8, // +0x9e1 size: 0x1 (0x1 * 0x1) type 8

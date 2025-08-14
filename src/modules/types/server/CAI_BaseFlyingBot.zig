@@ -1,6 +1,6 @@
 pub const CAI_BaseFlyingBot = extern struct {
     vtable: *anyopaque,
-    CAI_BaseActorBase: abi.Inherit(server.CAI_BaseActorBase),
+    CAI_BaseActorBase: abi.cpp.Inherit(server.CAI_BaseActorBase),
 
     m_vCurrentVelocity: m.Vector3, // +0x20b8 size: 0xc (0x1 * 0xc) type 3
     m_vCurrentAngularVelocity: m.Vector3, // +0x20c4 size: 0xc (0x1 * 0xc) type 3

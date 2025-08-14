@@ -1,6 +1,6 @@
 pub const CWorld = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_WorldMins: m.Vector3, // +0x9e0 size: 0xc (0x1 * 0xc) type 3
     m_WorldMaxs: m.Vector3, // +0x9ec size: 0xc (0x1 * 0xc) type 3

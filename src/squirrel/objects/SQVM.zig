@@ -19,7 +19,7 @@ pub const SQVM = extern struct {
     // some fields are probably incorrect
     vtable: *anyopaque,
     // TODO: SQVM inherits from SQCollectable. Currently causes a compile error. Tracked in https://github.com/ziglang/zig/issues/24636
-    // SQCollectable: abi.Inherit(sq.SQCollectable),
+    // SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
     uiRef: sq.SQUnsignedInteger,
     gap_8: [12]u8,
     toString: *anyopaque,

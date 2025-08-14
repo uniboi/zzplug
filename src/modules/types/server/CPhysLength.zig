@@ -1,6 +1,6 @@
 pub const CPhysLength = extern struct {
     vtable: *anyopaque,
-    CPhysConstraint: abi.Inherit(server.CPhysConstraint),
+    CPhysConstraint: abi.cpp.Inherit(server.CPhysConstraint),
 
     m_offset: [2]m.Vector3, // +0xa40 size: 0x18 (0x2 * 0xc) type 3
     m_vecAttach: m.Vector3, // +0xa58 size: 0xc (0x1 * 0xc) type 15

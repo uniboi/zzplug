@@ -1,6 +1,6 @@
 pub const CPlayer = extern struct {
     vtable: *anyopaque,
-    CBaseCombatCharacter: abi.Inherit(server.CBaseCombatCharacter),
+    CBaseCombatCharacter: abi.cpp.Inherit(server.CBaseCombatCharacter),
 
     m_szNetname: [256]u8, // +0x1498 size: 0x100 (0x100 * 0x1) type 8
     m_bZooming: bool, // +0x1598 size: 0x1 (0x1 * 0x1) type 6

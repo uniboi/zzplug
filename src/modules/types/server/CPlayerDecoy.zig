@@ -1,6 +1,6 @@
 pub const CPlayerDecoy = extern struct {
     vtable: *anyopaque,
-    CBaseAnimating: abi.Inherit(server.CBaseAnimating),
+    CBaseAnimating: abi.cpp.Inherit(server.CBaseAnimating),
 
     m_currentState: i32, // +0xeb8 size: 0x4 (0x1 * 0x4) type 5
     m_decoyFlags: i32, // +0xebc size: 0x4 (0x1 * 0x4) type 5

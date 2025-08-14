@@ -1,6 +1,6 @@
 pub const CTriggerBrush = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_OnStartTouch: [40]abi.undefined, // +0x9e0 size: 0x28 (0x1 * 0x28) type 11
     m_OnEndTouch: [40]abi.undefined, // +0xa08 size: 0x28 (0x1 * 0x28) type 11

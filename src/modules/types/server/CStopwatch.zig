@@ -1,5 +1,5 @@
 pub const CStopwatch = extern struct {
-    CStopwatchBase: abi.Inherit(server.CStopwatchBase),
+    CStopwatchBase: abi.cpp.Inherit(server.CStopwatchBase),
 
     m_interval: f32, // +0x8 size: 0x4 (0x1 * 0x4) type 1
 

@@ -1,6 +1,6 @@
 pub const SQWeakRef = extern struct {
     vtable: *VTable,
-    SQRefCounted: abi.Inherit(sq.SQRefCounted),
+    SQRefCounted: abi.cpp.Inherit(sq.SQRefCounted),
     obj: sq.SQObject,
 
     pub const VTable = extern struct {

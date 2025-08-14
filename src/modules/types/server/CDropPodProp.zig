@@ -1,6 +1,6 @@
 pub const CDropPodProp = extern struct {
     vtable: *anyopaque,
-    CDynamicProp: abi.Inherit(server.CDynamicProp),
+    CDynamicProp: abi.cpp.Inherit(server.CDynamicProp),
 
     m_Speed: f32, // +0x1028 size: 0x4 (0x1 * 0x4) type 1
     m_BoostSpeed: f32, // +0x102c size: 0x4 (0x1 * 0x4) type 1

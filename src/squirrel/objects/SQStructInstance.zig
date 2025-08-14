@@ -1,7 +1,7 @@
 pub const SQStructInstance = opaque {
     pub const Head = extern struct {
         vtable: *VTable,
-        SQCollectable: abi.Inherit(sq.SQCollectable),
+        SQCollectable: abi.cpp.Inherit(sq.SQCollectable),
 
         size: sq.SQUnsignedInteger,
         unknown_u34: sq.SQInteger,

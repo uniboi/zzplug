@@ -1,6 +1,6 @@
 pub const CScriptProp = extern struct {
     vtable: *anyopaque,
-    CDynamicProp: abi.Inherit(server.CDynamicProp),
+    CDynamicProp: abi.cpp.Inherit(server.CDynamicProp),
 
     m_title: [32]u8, // +0x1028 size: 0x20 (0x20 * 0x1) type 8
     m_footstepType: [64]u8, // +0x1048 size: 0x40 (0x40 * 0x1) type 8

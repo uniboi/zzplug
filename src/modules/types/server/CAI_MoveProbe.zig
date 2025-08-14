@@ -1,6 +1,6 @@
 pub const CAI_MoveProbe = extern struct {
     vtable: *anyopaque,
-    CAI_Component: abi.Inherit(server.CAI_Component),
+    CAI_Component: abi.cpp.Inherit(server.CAI_Component),
 
     m_bIgnoreTransientEntities: bool, // +0x10 size: 0x1 (0x1 * 0x1) type 6
     gap_11: [3]abi.undefined,

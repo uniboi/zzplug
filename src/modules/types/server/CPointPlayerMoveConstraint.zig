@@ -1,6 +1,6 @@
 pub const CPointPlayerMoveConstraint = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_flRadius: f32, // +0x9e0 size: 0x4 (0x1 * 0x4) type 1
     m_flConstraintWidth: f32, // +0x9e4 size: 0x4 (0x1 * 0x4) type 1

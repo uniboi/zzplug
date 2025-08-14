@@ -1,6 +1,6 @@
 pub const CSnapshotCanaryB = extern struct {
     vtable: *anyopaque,
-    CSnapshotCanary: abi.Inherit(server.CSnapshotCanary),
+    CSnapshotCanary: abi.cpp.Inherit(server.CSnapshotCanary),
 
     test {
         try std.testing.expect(@sizeOf(@This()) == 0xa50);

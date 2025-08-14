@@ -1,6 +1,6 @@
 pub const CTonemapTrigger = extern struct {
     vtable: *anyopaque,
-    CBaseTrigger: abi.Inherit(server.CBaseTrigger),
+    CBaseTrigger: abi.cpp.Inherit(server.CBaseTrigger),
 
     m_tonemapControllerName: [*:0]u8, // +0xc60 size: 0x8 (0x1 * 0x8) type 2
     m_hTonemapController: valve.EHANDLE, // +0xc68 size: 0x4 (0x1 * 0x4) type 13

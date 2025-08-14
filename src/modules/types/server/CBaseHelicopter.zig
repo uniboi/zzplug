@@ -1,6 +1,6 @@
 pub const CBaseHelicopter = extern struct {
     vtable: *anyopaque,
-    CBaseHelicopterBehaviorHost: abi.Inherit(server.CBaseHelicopterBehaviorHost),
+    CBaseHelicopterBehaviorHost: abi.cpp.Inherit(server.CBaseHelicopterBehaviorHost),
 
     m_flForce: f32, // +0x2198 size: 0x4 (0x1 * 0x4) type 1
     m_vecAngAcceleration: m.Vector3, // +0x219c size: 0xc (0x1 * 0xc) type 3

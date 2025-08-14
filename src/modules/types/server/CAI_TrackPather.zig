@@ -1,6 +1,6 @@
 pub const CAI_TrackPather = extern struct {
     vtable: *anyopaque,
-    CAI_BaseNPC: abi.Inherit(server.CAI_BaseNPC),
+    CAI_BaseNPC: abi.cpp.Inherit(server.CAI_BaseNPC),
 
     m_vecDesiredPosition: m.Vector3, // +0x20b0 size: 0xc (0x1 * 0xc) type 15
     m_vecGoalOrientation: m.Vector3, // +0x20bc size: 0xc (0x1 * 0xc) type 3

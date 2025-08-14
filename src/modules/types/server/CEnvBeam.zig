@@ -1,6 +1,6 @@
 pub const CEnvBeam = extern struct {
     vtable: *anyopaque,
-    CBeam: abi.Inherit(server.CBeam),
+    CBeam: abi.cpp.Inherit(server.CBeam),
 
     m_active: i32, // +0xa88 size: 0x4 (0x1 * 0x4) type 5
     m_spriteTexture: i32, // +0xa8c size: 0x4 (0x1 * 0x4) type 5

@@ -1,6 +1,6 @@
 pub const CAI_DynamicLinkController = extern struct {
     vtable: *anyopaque,
-    CBaseEntity: abi.Inherit(server.CBaseEntity),
+    CBaseEntity: abi.cpp.Inherit(server.CBaseEntity),
 
     m_ControlledLinks: [32]abi.undefined, // +0x9e0 size: 0x20 (0x1 * 0x20) type 0
     m_nLinkState: i32, // +0xa00 size: 0x4 (0x1 * 0x4) type 5

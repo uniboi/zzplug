@@ -1,6 +1,6 @@
 pub const SQTable = extern struct {
     vtable: *VTable,
-    SQDelegable: abi.Inherit(sq.SQDelegable),
+    SQDelegable: abi.cpp.Inherit(sq.SQDelegable),
 
     /// all table slots
     nodes: [*]HashNode,
