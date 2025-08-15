@@ -52,8 +52,8 @@ pub const ConCommand = extern struct {
         callback: *const CommandCallback,
         help_text: [*:0]const u8,
         flags: ConCommandBase.Flags,
-        completion_callback: *const CommandCompletionCallback,
-    ) std.mem.Allocator.Error!*const ConCommand {
+        completion_callback: ?*const CommandCompletionCallback,
+    ) std.mem.Allocator.Error!*ConCommand {
         const cmd = try allocator.create(ConCommand);
         return modules.engine.?.conCommandConstructor(
             cmd,

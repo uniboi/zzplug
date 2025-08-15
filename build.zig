@@ -25,6 +25,7 @@ pub fn build(b: *std.Build) void {
     addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target);
     addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target);
     addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target);
+    addExample(b, "con_commands", "create a ConCommand named \"zzplug_hello_world\".", zzplug, target);
 }
 
 fn addDocs(

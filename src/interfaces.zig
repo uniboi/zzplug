@@ -41,7 +41,7 @@ pub const PluginConfig = struct {
     dependency_name: [*:0]const u8,
 
     /// Determines if NS will load this plugins for dedicated servers and / or clients
-    context: PluginContext,
+    context: PluginContext = .always,
 };
 
 /// If all zeroes, ns will use the default plugin colors

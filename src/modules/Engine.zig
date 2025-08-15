@@ -5,7 +5,7 @@ conCommandConstructor: *const fn (
     cb: *const tier1.ConCommand.CommandCallback,
     help_text: [*:0]const u8,
     flags: tier1.ConCommandBase.Flags,
-    cbc: *const tier1.ConCommand.CommandCompletionCallback,
+    cbc: ?*const tier1.ConCommand.CommandCompletionCallback,
 ) callconv(.c) *tier1.ConCommand,
 
 pub fn init(module: *Module) @This() {
