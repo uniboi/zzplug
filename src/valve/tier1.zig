@@ -18,6 +18,9 @@ pub const ConCommandBase = extern struct {
     s_pAccessor: [*]IConCommandBaseAccessor,
 
     pub const VTable = extern struct {};
+    pub const Flags = packed struct(u32) {
+        _: u32 = 0, // TODO: figure out flags
+    };
 
     test "layout" {
         abi.assertSize(@This(), 0x40);
@@ -35,8 +38,8 @@ pub const ConCommand = extern struct {
     vtable: *VTable,
     ConCommandBase: abi.cpp.Inherit(ConCommandBase),
 
-    m_pCommandCallback: *CommandCallback,
-    m_pCompletionCallback: *CommandCompletionCallback,
+    m_pCommandCallback: *const CommandCallback,
+    m_pCompletionCallback: *const CommandCompletionCallback,
     m_nCallbackFlags: u32,
 
     // TODO: from ttf2sdk, but these might not exist in the structure
@@ -45,18 +48,21 @@ pub const ConCommand = extern struct {
 
     pub fn create(
         allocator: std.mem.Allocator,
-        pName: [*:0]const u8,
+        name: [*:0]const u8,
         callback: *const CommandCallback,
-        flags: CallbackFlags,
+        help_text: [*:0]const u8,
+        flags: ConCommandBase.Flags,
         completion_callback: *const CommandCompletionCallback,
-    ) *const ConCommand {
-        _ = pName;
-        _ = callback;
-        _ = flags;
-        _ = completion_callback;
-        const cmd = allocator.create(ConCommand);
-        // TODO: constructor
-        return cmd;
+    ) std.mem.Allocator.Error!*const ConCommand {
+        const cmd = try allocator.create(ConCommand);
+        return modules.engine.?.conCommandConstructor(
+            cmd,
+            name,
+            callback,
+            help_text,
+            flags,
+            completion_callback,
+        );
     }
 
     pub const VTable = extern struct {};
@@ -64,6 +70,7 @@ pub const ConCommand = extern struct {
         m_bHasCompletionCallback: bool,
         m_bUsingNewCommandCallback: bool,
         m_bUsingCommandCallbackInterface: bool,
+        _: u29 = 0,
     };
 
     pub const CommandCallback = fn (command: *const CCommand) callconv(.c) void;
@@ -92,4 +99,4 @@ pub const CCommand = extern struct {
 
 const abi = @import("../abi.zig");
 const std = @import("std");
-
+const modules = @import("../modules.zig");
