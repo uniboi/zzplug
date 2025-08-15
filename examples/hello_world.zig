@@ -2,7 +2,7 @@
 
 // this callback is called by northstar when the plugin module has been loaded
 fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallbacks.InitData, _: bool) callconv(.c) void {
-    zzplug.modules.northstar.log(.info, "Hello World");
+    zzplug.modules.northstar.?.log(.info, "Hello World");
 }
 
 // configure the plugin

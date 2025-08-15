@@ -38,7 +38,7 @@ fn scriptIncrement(sqvm: *sq.SQVM, _: *anyopaque, _: *anyopaque, _: *anyopaque) 
 
     // Always check if the type of every argument passed is correct!
     if (n.type != .integer) {
-        zzplug.modules.northstar.logFmt(.err, "Argument 1 is not an integer. {f}", .{n});
+        zzplug.modules.northstar.?.logFmt(.err, "Argument 1 is not an integer. {f}", .{n});
         return .@"error";
     }
 

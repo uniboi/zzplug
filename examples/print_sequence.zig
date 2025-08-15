@@ -33,17 +33,17 @@ fn scriptPrintCurrentSequence(sqvm: *sq.SQVM, _: *anyopaque, _3: *anyopaque, _4:
 
     // Always check if the type of every argument passed is correct!
     if (e.type != .entity_instance) {
-        return server.sq_throwerror(sqvm, "Argument 1 is not an entity");
+        return server.*.?.sq_throwerror(sqvm, "Argument 1 is not an entity");
     }
 
-    const entity: ?*Server.types.CBaseAnimatingOverlay = @ptrCast(server.sq_getentityfrominstance(sqvm, e, server.entity_type));
+    const entity: ?*Server.types.CBaseAnimatingOverlay = @ptrCast(server.*.?.sq_getentityfrominstance(sqvm, e, server.*.?.entity_type));
     if (entity == null) {
-        return server.sq_throwerror(sqvm, "Argument 1 is not a valid entity instance");
+        return server.*.?.sq_throwerror(sqvm, "Argument 1 is not a valid entity instance");
     }
 
     const sequence_idx = entity.?.CBaseAnimating.m_animSequence;
-    const sequence_name = server.GetSequenceName(@ptrCast(entity), sequence_idx, _3, _4);
-    ns.logFmt(.info, "sequence ({d}) \"{?s}\"", .{ sequence_idx, sequence_name });
+    const sequence_name = server.*.?.GetSequenceName(@ptrCast(entity), sequence_idx, _3, _4);
+    ns.*.?.logFmt(.info, "sequence ({d}) \"{?s}\"", .{ sequence_idx, sequence_name });
 
     return .null;
 }

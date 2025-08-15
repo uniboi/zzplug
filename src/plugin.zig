@@ -19,13 +19,13 @@ pub fn Plugin(
 
     const Proxies = struct {
         pub fn init(instance: *const PluginCallbacks.Instance, ns_module: std.os.windows.HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.c) void {
-            modules.initNorthstar(.fromHandle(ns_module), init_data);
+            modules.northstar = .init(.fromHandle(ns_module), init_data);
 
             const tier0 = GetModuleHandleA("tier0.dll");
             if (tier0) |module| {
-                modules.initTier0(.fromHandle(module));
+                modules.tier0 = .init(.fromHandle(module));
             } else {
-                modules.northstar.log(.err, "tier0.dll is not loaded");
+                modules.northstar.?.log(.err, "tier0.dll is not loaded");
             }
 
             callbacks.init(instance, ns_module, init_data, reloaded);
@@ -36,6 +36,7 @@ pub fn Plugin(
                 const Libraries = enum {
                     @"server.dll",
                     @"client.dll",
+                    @"engine.dll",
                 };
 
                 const name = std.mem.span(library_name.?);
@@ -44,12 +45,15 @@ pub fn Plugin(
                 if (lib != null) {
                     switch (lib.?) {
                         .@"server.dll" => {
-                            modules.initServer(.fromHandle(module));
-                            sq.ctx.initForServer(&modules.server);
+                            modules.server = .init(.fromHandle(module));
+                            sq.ctx.initForServer(&modules.server.?);
                         },
                         .@"client.dll" => {
-                            modules.initClient(.fromHandle(module));
-                            sq.ctx.initForClient(&modules.client);
+                            modules.client = .init(.fromHandle(module));
+                            sq.ctx.initForClient(&modules.client.?);
+                        },
+                        .@"engine.dll" => {
+                            modules.engine = .init(.fromHandle(module));
                         },
                     }
                 }
