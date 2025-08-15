@@ -116,7 +116,7 @@ pub const PluginCallbacks = extern struct {
     /// Called after this plugin has been loaded and validated by Northstar.
     ///
     /// At this point in time no game systems (for example any squirrel VM) have been initialized
-    init: *const fn (*const Instance, ns_handle: HMODULE, init_data: *const InitData, reloaded: bool) callconv(.c) void,
+    init: *const fn (*const Instance, ns_handle: HMODULE, init_data: *const InitData, reloaded: bool) callconv(.c) void = initStub,
 
     /// Called after all plugins have been initialized
     finalize: *const fn (*const Instance) callconv(.c) void = finalizeStub,
@@ -142,6 +142,7 @@ pub const PluginCallbacks = extern struct {
     /// Called every game frame
     run_frame: *const fn (*const Instance) callconv(.c) void = runFrameStub,
 
+    fn initStub(_: *const Instance, _: HMODULE, _: *const InitData, _: bool) callconv(.c) void {}
     fn finalizeStub(_: *const Instance) callconv(.c) void {}
     fn unloadStub(_: *const Instance) callconv(.c) bool {
         return false;
