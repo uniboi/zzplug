@@ -53,11 +53,12 @@ fn addExample(
     zzplug: *std.Build.Module,
     target: std.Build.ResolvedTarget,
 ) void {
-    const example_module = b.addModule("example." ++ name, .{ .root_source_file = b.path("examples/" ++ name ++ ".zig"), .target = target });
-
     const example = b.addLibrary(.{
         .name = name ++ "_example",
-        .root_module = example_module,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("examples/" ++ name ++ ".zig"),
+            .target = target,
+        }),
         .linkage = .dynamic,
     });
     example.root_module.addImport("zzplug", zzplug);
