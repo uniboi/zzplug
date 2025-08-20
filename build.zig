@@ -1,15 +1,15 @@
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
-    const target = b.resolveTargetQuery(.{
-        .cpu_arch = .x86_64,
-        .cpu_model = .baseline,
-        .os_tag = .windows,
-    });
+    const optimize = b.standardOptimizeOption(.{});
+    const target = b.standardTargetOptions(.{});
+
+    if(target.result.os.tag != .windows) @panic("zzplug can only be compiled for windows targets");
 
     const zzplug = b.addModule("zzplug", .{
         .root_source_file = b.path("./src/zzplug.zig"),
         .target = target,
+        .optimize = optimize,
     });
 
     const lib_unit_tests = b.addTest(.{

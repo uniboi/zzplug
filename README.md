@@ -4,6 +4,23 @@ A small library implementing the plumbing required for [Northstar](https://north
 
 For Rust plugins and an engine interface, check out [rrplug](https://github.com/r2northstartools/rrplug).
 
+## Installation
+
+First, download the package:
+
+```
+$ zig fetch --save git+https://github.com/uniboi/zzplug
+```
+
+then add zzplug as an import in your `build.zig`
+
+```zig
+const zzplug = b.dependency("zzplug", .{ .target = target, .optimize = optimize });
+your_root_module.addImport("zzplug", zzplug.module());
+```
+
+Now you can use zzplug with `@import("zzplug")`.
+
 ## Usage
 
 1. Create a configured plugin instance
