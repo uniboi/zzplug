@@ -23,62 +23,43 @@ Now you can use zzplug with `@import("zzplug")`.
 
 ## Usage
 
-1. Create a configured plugin instance
+```zig
+const my_plugin: zzplug.Plugin(
+    // this is the identity configuration
+    .{
+        .name = "my_plugin",
+        .log_name = "my_plugin",
+        .dependency_name = "MY_PLUGIN",
+        .context = .{ .client = true, .dedicated = true },
+    },
 
-    ```zig
-    const zzplug = @import("zzplug");
-    
-    const my_plugin: zzplug.Plugin(
-        // this is the plugin configuration object
-        // customize general info here
-        .{
-            .name = "my_plugin",
-            .log_name = "my_plugin",
-            .dependency_name = "MY_PLUGIN",
-            .context = .{ .client = true, .dedicated = true },
-        },
+    // northstar callbacks
+    .{
+        .init = init,
+    },
 
-        // northstar callbacks are defined here.
-        // optional callbacks can be omitted and will be stubbed out.
-        .{
-            .init = init,
-        },
+    // define any additional interfaces your plugin exposes here as a static string map
+    // unless other plugins depend on this plugin, this can be left empty.
+    .{},
+) = .{};
 
-        // define any additional interfaces your plugin exposes here as a static string map
-        // unless other plugins depend on this plugin, this can be left empty.
-        .{},
-    ) = .{};
-    ```
+comptime {
+    my_plugin.embed();
+}
 
-2. Define the plugin `init` callback
+fn init(_: *const Ins, _: std.os.windows.HMODULE, _: *const InitData, _: bool) callconv(.c) void {
+    zzplug.modules.northstar.?.log(.info, "Hello World");
+}
+```
 
-    ```zig
-    const PluginCallbacks = zzplug.interfaces.PluginCallbacks;
-    const InterfaceStatus = zzplug.interfaces.InterfaceStatus;
-    const NsSys = zzplug.interfaces.NsSys;
+const zzplug = @import("zzplug");
+const std = @import("std");
+const Ins = zzplug.interfaces.PluginCallbacks.Instance;
+const InitData = zzplug.interfaces.PluginCallbacks.InitData;
+```
 
-    fn init(_: *const PluginCallbacks.Instance, ns_module: HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.C) void {
-        _ = reloaded;
+## Docs
 
-        // interfaces can be instantiated with the `CreateInterface` function exported by most modules loaded by the game.
-        // here, the `CreateInterface` function from Northstar is acquired
-        const ns_create_interface = @as(*fn (name: [*:0]const u8, ?*InterfaceStatus) callconv(.C) *anyopaque, @ptrCast(std.os.windows.kernel32.GetProcAddress(ns_module, "CreateInterface")));
-        const sys: *const NsSys = @alignCast(@ptrCast(ns_create_interface("NSSys001", null)));
-
-        sys.vftable.log(sys, init_data.handle, .info, "Hello World!");
-    }
-    ```
-
-3. Initialize your plugin
-
-    Your Plugin must expose it's own `CreateInterface` function as well. zzplug can do this automatically for you:
-
-    ```
-    comptime {
-        my_plugin.embed();
-    }
-    ```
-
-## Examples
+Build docs with `zig build docs`.
 
 Examples can be ran with `zig build example.<name>`, e.g. `zig build example.hello_world`.
