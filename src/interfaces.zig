@@ -50,7 +50,7 @@ pub const PluginConfig = struct {
         _: u40 = 0,
 
         /// Default Northstar color
-        pub const default: Color = .{ .red = 0, .green = 0, .blue = 0 },
+        pub const default: Color = .{ .red = 0, .green = 0, .blue = 0 };
     };
 };
 
