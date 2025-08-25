@@ -42,14 +42,16 @@ pub const PluginConfig = struct {
 
     /// Determines if NS will load this plugins for dedicated servers and / or clients
     context: PluginContext = .always,
-};
 
-/// If all zeroes, ns will use the default plugin colors
-pub const Color = packed struct(u64) {
-    red: u8,
-    green: u8,
-    blue: u8,
-    _: u40 = 0,
+    pub const Color = packed struct(u64) {
+        red: u8,
+        green: u8,
+        blue: u8,
+        _: u40 = 0,
+
+        /// Default Northstar color
+        pub const default: Color = .{ .red = 0, .green = 0, .blue = 0 },
+    };
 };
 
 pub fn PluginId(config: PluginConfig) type {
