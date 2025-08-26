@@ -16,7 +16,7 @@ then add zzplug as an import in your `build.zig`
 
 ```zig
 const zzplug = b.dependency("zzplug", .{ .target = target, .optimize = optimize });
-your_root_module.addImport("zzplug", zzplug.module());
+your_root_module.addImport("zzplug", zzplug.module("zzplug"));
 ```
 
 Now you can use zzplug with `@import("zzplug")`.

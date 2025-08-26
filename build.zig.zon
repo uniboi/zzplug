@@ -3,7 +3,13 @@
     .version = "0.0.0",
     .fingerprint = 0x3759cfaeb8ea9b4,
     .minimum_zig_version = "0.15.0-dev.1276+3fbdd58a8",
-    .dependencies = .{},
+    .dependencies = .{
+        // TODO: This could be lazy
+        .zigzag = .{
+            .url = "git+https://github.com/uniboi/zigzag#5d90b669bd64cbbb445f5555de3b4c28cf508b80",
+            .hash = "zigzag-0.0.1-wqJDFn2LAAArjRA9fApCcj5xG3JSZcDexs5ZRM9GWUzM",
+        },
+    },
     .paths = .{
         "build.zig",
         "build.zig.zon",

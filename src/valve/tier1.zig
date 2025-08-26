@@ -46,6 +46,8 @@ pub const ConCommand = extern struct {
     unk_58: u32,
     unk_5c: u32,
 
+    /// Create a ConCommand.
+    /// Depends on engine.dll being loaded
     pub fn create(
         allocator: std.mem.Allocator,
         name: [*:0]const u8,

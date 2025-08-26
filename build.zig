@@ -4,7 +4,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
     const target = b.standardTargetOptions(.{});
 
-    if(target.result.os.tag != .windows) @panic("zzplug can only be compiled for windows targets");
+    if (target.result.os.tag != .windows) @panic("zzplug can only be compiled for windows targets");
 
     const zzplug = b.addModule("zzplug", .{
         .root_source_file = b.path("./src/zzplug.zig"),
@@ -20,12 +20,17 @@ pub fn build(b: *std.Build) void {
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_lib_unit_tests.step);
 
+    const zigzag = b.dependency("zigzag", .{ .target = target, .optimize = optimize });
+
     addDocs(b, zzplug);
 
-    addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target);
-    addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target);
-    addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target);
-    addExample(b, "con_commands", "create a ConCommand named \"zzplug_hello_world\".", zzplug, target);
+    _ = addExample(b, "hello_world", "log hello world when the plugin is loaded", zzplug, target);
+    _ = addExample(b, "hello_squirrel", "register a squirrel function for all SQVMs", zzplug, target);
+    _ = addExample(b, "print_sequence", "register a sqvm function to print the current playing animation of an entity", zzplug, target);
+    _ = addExample(b, "con_commands", "create a ConCommand named \"zzplug_hello_world\"", zzplug, target);
+    const hooks_example = addExample(b, "hooks", "hook the 'ping' concommand", zzplug, target);
+
+    hooks_example.root_module.addImport("zigzag", zigzag.module("zigzag"));
 }
 
 fn addDocs(
@@ -52,7 +57,7 @@ fn addExample(
     comptime description: []const u8,
     zzplug: *std.Build.Module,
     target: std.Build.ResolvedTarget,
-) void {
+) *std.Build.Step.Compile {
     const example = b.addLibrary(.{
         .name = name ++ "_example",
         .root_module = b.createModule(.{
@@ -66,4 +71,7 @@ fn addExample(
     const build_example = b.addInstallArtifact(example, .{});
     const build_example_step = b.step("example." ++ name, description);
     build_example_step.dependOn(&build_example.step);
+
+    return example;
 }
+
