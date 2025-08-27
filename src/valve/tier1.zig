@@ -14,23 +14,22 @@ pub const ConCommandBase = extern struct {
     m_pszName: [*:0]const u8,
     m_pszHelpString: [*:0]const u8,
     m_nFlags: u32,
-    s_pConCommandBases: [*]ConCommandBase,
-    s_pAccessor: [*]IConCommandBaseAccessor,
 
-    pub const VTable = extern struct {};
+    pub const VTable = extern struct {
+        // ...
+    };
+
     pub const Flags = packed struct(u32) {
         _: u32 = 0, // TODO: figure out flags
     };
 
     test "layout" {
-        abi.assertSize(@This(), 0x40);
+        abi.assertSize(@This(), 0x30);
         abi.assertOffset(@This(), "m_pNext", 0x8);
         abi.assertOffset(@This(), "m_bRegistered", 0x10);
         abi.assertOffset(@This(), "m_pszName", 0x18);
         abi.assertOffset(@This(), "m_pszHelpString", 0x20);
         abi.assertOffset(@This(), "m_nFlags", 0x28);
-        abi.assertOffset(@This(), "s_pConCommandBases", 0x30);
-        abi.assertOffset(@This(), "s_pAccessor", 0x38);
     }
 };
 
@@ -38,13 +37,11 @@ pub const ConCommand = extern struct {
     vtable: *VTable,
     ConCommandBase: abi.cpp.Inherit(ConCommandBase),
 
+    m_fnSupplementalFinishCallback: *anyopaque,
+    m_fnSupplementalCallback: *anyopaque,
     m_pCommandCallback: *const CommandCallback,
     m_pCompletionCallback: *const CommandCompletionCallback,
     m_nCallbackFlags: u32,
-
-    // TODO: from ttf2sdk, but these might not exist in the structure
-    unk_58: u32,
-    unk_5c: u32,
 
     /// Create a ConCommand.
     /// Depends on engine.dll being loaded
@@ -67,7 +64,10 @@ pub const ConCommand = extern struct {
         );
     }
 
-    pub const VTable = extern struct {};
+    pub const VTable = extern struct {
+        // ...
+    };
+
     pub const CallbackFlags = packed struct(u32) {
         m_bHasCompletionCallback: bool,
         m_bUsingNewCommandCallback: bool,
@@ -76,14 +76,13 @@ pub const ConCommand = extern struct {
     };
 
     pub const CommandCallback = fn (command: *const CCommand) callconv(.c) void;
-    /// Returns 0 to COMMAND_COMPLETION_MAXITEMS worth of completion strings
     pub const CommandCompletionCallback = fn (partial: [*:0]const u8, commands: *const [command_completion_max_items][command_completion_item_length]u8) callconv(.c) i32;
 
     const command_completion_max_items = 64;
     const command_completion_item_length = 128;
 
     test "layout" {
-        abi.assertSize(@This(), 0x60);
+        abi.assertSize(@This(), 0x58);
     }
 };
 
@@ -98,6 +97,81 @@ pub const CCommand = extern struct {
     const command_max_argc = 64;
     const command_max_length = 512;
 };
+
+pub const IConVar = extern struct {
+    vtable: *const VTable,
+
+    pub const VTable = extern struct {
+        // ...
+    };
+};
+
+pub const ConVar = extern struct {
+    vtable: *const VTable,
+    ConCommandBase: abi.cpp.Inherit(ConCommandBase),
+    IConVar: IConVar, // should technically be abi.Inherit(IConVar) and the vtable embedded directly
+    m_pParent: *const ConCommandBase,
+    m_pszDefaultValue: [*:0]const u8,
+    m_Value: Value,
+    m_bHasMin: bool,
+    m_fMinVal: f32,
+    m_bHasMax: bool,
+    m_fMaxVal: f32,
+    m_fnChangeCallbacks: CUtlVector(ChangeCallback, CUtlMemory(ChangeCallback, i32)),
+
+    /// CVValue_t
+    pub const Value = extern struct {
+        m_pszString: [*:0]u8,
+        m_iStringLength: i32,
+        m_fValue: f32,
+        m_nValue: i32,
+
+        test "layout" {
+            abi.assertSize(Value, 0x18);
+        }
+    };
+
+    /// FnChangeCallback_t
+    pub const ChangeCallback = *const fn (
+        variable: *const IConVar,
+        pOldValue: [*:0]const u8,
+        fOldValue: f32,
+    ) callconv(.c) void;
+
+    const VTable = extern struct {
+        // ...
+    };
+
+    test "layout" {
+        abi.assertSize(ConVar, 0x90);
+    }
+};
+
+pub fn CUtlMemory(T: type, I: type) type {
+    _ = I; // Index type
+
+    return extern struct {
+        m_pMemory: [*]T,
+        m_nAllocationCount: i32,
+        m_nGrowSize: i32,
+
+        test "layout" {
+            abi.assertSize(@This(), 0x10);
+        }
+    };
+}
+
+pub fn CUtlVector(T: type, CAllocator: type) type {
+    return extern struct {
+        m_Memory: CAllocator,
+        m_Size: i32,
+        m_pElements: [*]T,
+
+        test "layout" {
+            abi.assertSize(@This(), 0x20);
+        }
+    };
+}
 
 const abi = @import("../abi.zig");
 const std = @import("std");

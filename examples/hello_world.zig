@@ -5,6 +5,10 @@ fn init(_: *const PluginCallbacks.Instance, _: HMODULE, _: *const PluginCallback
     zzplug.modules.northstar.?.log(.info, "Hello World");
 }
 
+fn unload(_: *const PluginCallbacks.Instance) callconv(.c) bool {
+    return true;
+}
+
 // configure the plugin
 const hello_world: zzplug.Plugin(
     .{
@@ -17,6 +21,7 @@ const hello_world: zzplug.Plugin(
     .{
         // specify the plugin callback that gets called by northstar immediately after loading
         .init = init,
+        .unload = unload,
     },
     .initComptime(.{}),
 ) = .{};
