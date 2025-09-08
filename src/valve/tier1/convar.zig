@@ -31,37 +31,38 @@ pub const ConCommandBase = extern struct {
 
     pub const Flags = packed struct(u32) {
         /// FCVAR_UNREGISTERED
-        unregistered: bool,
+        unregistered: bool = false,
 
         /// FCVAR_DEVELOPMENTONLY
-        development_only: bool,
+        development_only: bool = false,
 
         /// FCVAR_GAMEDLL
-        game_dll: bool,
+        game_dll: bool = false,
 
         /// FCVAR_CLIENTDLL
-        client_dll: bool,
+        client_dll: bool = false,
 
         /// FCVAR_HIDDEN
-        hidden: bool,
+        hidden: bool = false,
 
         /// FCVAR_PROTECTED
         /// ConVar only
-        protected: bool,
+        protected: bool = false,
 
         /// FCVAR_SPONLY
-        sp_only: bool,
+        sp_only: bool = false,
 
         /// FCVAR_ARCHIVE
-        archive: bool,
+        archive: bool = false,
 
         /// FCVAR_NOTIFY
-        notify: bool,
+        notify: bool = false,
 
         /// FCVAR_USERINFO
-        user_info: bool,
+        user_info: bool = false,
 
         /// Means different things for ConVars and ConCommands
+        /// TODO: maybe create seperate types?
         ambiguous: packed union {
             /// FCVAR_PRINTABLEONLY
             ///
@@ -72,65 +73,65 @@ pub const ConCommandBase = extern struct {
             ///
             /// ConCommands only
             game_dll_for_remote_clients: bool,
-        },
+        } = . { .printable_only = false },
 
         /// FCVAR_UNLOGGED
-        unlogged: bool,
+        unlogged: bool = false,
 
         /// FCVAR_NEVER_AS_STRING
-        never_as_string: bool,
+        never_as_string: bool = false,
 
         /// FCVAR_REPLICATED
-        replicated: bool,
+        replicated: bool = false,
 
         /// FCVAR_CHEAT
-        cheat: bool,
+        cheat: bool = false,
 
         /// FCVAR_SS
-        splitscreen: bool,
+        splitscreen: bool = false,
 
         /// FCVAR_DEMO
-        demo: bool,
+        demo: bool = false,
 
         /// FCVAR_DONTRECORD
-        dont_record: bool,
+        dont_record: bool = false,
 
         /// FCVAR_SS_ADDED
-        splitscreen_added: bool,
+        splitscreen_added: bool = false,
 
         /// FCVAR_RELEASE
-        release: bool,
+        release: bool = false,
 
         /// FCVAR_RELOAD_MATERIALS
-        reload_materials: bool,
+        reload_materials: bool = false,
 
         /// FCVAR_RELOAD_TEXTURES
-        reload_textures: bool,
+        reload_textures: bool = false,
 
         /// FCVAR_NOT_CONNECTED
-        not_connected: bool,
+        not_connected: bool = false,
 
         /// FCVAR_MATERIAL_SYSTEM_THREAD
-        material_system_thread: bool,
+        material_system_thread: bool = false,
 
         /// FCVAR_ARCHIVE_GAMECONSOLE
-        archive_game_console: bool,
+        archive_game_console: bool = false,
 
         /// FCVAR_ACCESSIBLE_FROM_THREADS
-        accessible_from_threads: bool,
+        accessible_from_threads: bool = false,
 
-        _gap_26: u2,
+        _gap_26: u2 = 0,
 
         /// FCVAR_SERVER_CAN_EXECUTE
-        server_can_execute: bool,
+        server_can_execute: bool = false,
 
         /// FCVAR_SERVER_CANNOT_QUERY
-        server_cannot_query: bool,
+        server_cannot_query: bool = false,
 
         /// FCVAR_CLIENTCMD_CAN_EXECUTE
-        clientcmd_can_execute: bool,
+        clientcmd_can_execute: bool = false,
 
-        _gap_31: u1,
+        _gap_31: u1 = 0,
     };
 
     test "layout" {
@@ -291,6 +292,8 @@ pub const ConVar = extern struct {
 pub const CVarDLLIdentifier = enum(i32) { _ };
 
 const abi = @import("../../abi.zig");
-const tier1 = @import("../tier1.zig");
-const modules = @import("../modules.zig");
+const modules = @import("../../modules.zig");
 const std = @import("std");
+const tier1 = @import("../tier1.zig");
+const CUtlVector = tier1.CUtlVector;
+const CUtlString = tier1.CUtlString;
