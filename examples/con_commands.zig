@@ -1,15 +1,14 @@
-const con_commands_example: zzplug.Plugin(
-    .{
+const con_commands_example: zzplug.Plugin(.{
+    .info = .{
         .name = "zzplug_concommand_example",
         .log_name = "ccexample",
         .dependency_name = "CON_COMMAND_EXAMPLE",
     },
-    .{
+    .callbacks = .{
         .unload = unload,
         .on_library_loaded = onLibraryLoaded,
     },
-    .{},
-) = .{};
+}) = .{};
 
 comptime {
     con_commands_example.embed();
@@ -18,7 +17,7 @@ comptime {
 var cc_hello_world: *zzplug.valve.tier1.ConCommand = undefined;
 
 fn unload(_: *const Callbacks.Instance) callconv(.c) bool {
-    if(zzplug.modules.tier0) |tier0| {
+    if (zzplug.modules.tier0) |tier0| {
         tier0.allocator().destroy(cc_hello_world);
     }
 
@@ -26,8 +25,8 @@ fn unload(_: *const Callbacks.Instance) callconv(.c) bool {
 }
 
 fn onLibraryLoaded(_: *const Callbacks.Instance, _: std.os.windows.HMODULE, lib_name: ?[*:0]const u8) callconv(.c) void {
-    if(lib_name == null) return;
-    if(std.mem.eql(u8, "engine.dll", std.mem.span(lib_name.?))) {
+    if (lib_name == null) return;
+    if (std.mem.eql(u8, "engine.dll", std.mem.span(lib_name.?))) {
         cc_hello_world = zzplug.valve.tier1.ConCommand.create(
             zzplug.modules.tier0.?.allocator(),
             "zzplug_hello_world",

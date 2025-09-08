@@ -6,19 +6,18 @@
 //! ] toggle_hook
 //! ] status
 
-const hooks_example: zzplug.Plugin(
-    .{
+const hooks_example: zzplug.Plugin(.{
+    .info = .{
         .name = "hooks_example",
         .log_name = "hkexample",
         .dependency_name = "HOOKS_EXAMPLE",
     },
-    .{
+    .callbacks = .{
         .init = init,
         .unload = unload,
         .on_library_loaded = onLibraryLoaded,
     },
-    .{},
-) = .{};
+}) = .{};
 
 comptime {
     hooks_example.embed();

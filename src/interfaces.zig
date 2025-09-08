@@ -19,7 +19,7 @@ pub const PluginContext = packed struct(c_longlong) {
     pub const always: @This() = .{ .dedicated = true, .client = true };
 };
 
-pub const PluginConfig = struct {
+pub const PluginIdConfig = struct {
     /// General plugin name
     name: [*:0]const u8,
 
@@ -54,7 +54,7 @@ pub const PluginConfig = struct {
     };
 };
 
-pub fn PluginId(config: PluginConfig) type {
+pub fn PluginId(config: PluginIdConfig) type {
     return extern struct {
 
         // vtable: *const PluginIdVTable = &plugin_id_vtable,

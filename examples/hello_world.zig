@@ -10,21 +10,20 @@ fn unload(_: *const PluginCallbacks.Instance) callconv(.c) bool {
 }
 
 // configure the plugin
-const hello_world: zzplug.Plugin(
-    .{
+const hello_world: zzplug.Plugin(.{
+    .info = .{
         .name = "zzplug_example",
         .log_name = "zzexample", // All NS log prefixes are 9 chars long. Plugins are free to choose any length but I usually use 9 to line the logs up
         .log_color = .{ .red = 224, .green = 187, .blue = 228 },
         .dependency_name = "ZZPLUG_EXAMPLE",
         .context = .{ .client = true, .dedicated = true },
     },
-    .{
+    .callbacks = .{
         // specify the plugin callback that gets called by northstar immediately after loading
         .init = init,
         .unload = unload,
     },
-    .initComptime(.{}),
-) = .{};
+}) = .{};
 
 // Calling the embed method on the plugin is required. Otherwise the plugin can't get loaded by northstar
 comptime {

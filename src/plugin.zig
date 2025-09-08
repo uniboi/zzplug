@@ -10,12 +10,8 @@ extern "kernel32" fn GetModuleHandleA(lpModuleName: ?[*:0]const u8) callconv(.wi
 ///    my_plugin.embed();
 /// }
 /// ```
-pub fn Plugin(
-    comptime config: PluginConfig,
-    comptime callbacks: PluginCallbacks,
-    comptime interfaces: std.StaticStringMap(*fn () *anyopaque),
-) type {
-    const plugin_id: PluginId(config) = .{};
+pub fn Plugin(comptime config: Config) type {
+    const plugin_id: PluginId(config.info) = .{};
 
     const Proxies = struct {
         pub fn init(instance: *const PluginCallbacks.Instance, ns_module: std.os.windows.HMODULE, init_data: *const PluginCallbacks.InitData, reloaded: bool) callconv(.c) void {
@@ -28,7 +24,7 @@ pub fn Plugin(
                 modules.northstar.?.log(.err, "tier0.dll is not loaded");
             }
 
-            callbacks.init(instance, ns_module, init_data, reloaded);
+            config.callbacks.init(instance, ns_module, init_data, reloaded);
         }
 
         pub fn onLibraryLoaded(instance: *const PluginCallbacks.Instance, module: std.os.windows.HMODULE, library_name: ?[*:0]const u8) callconv(.c) void {
@@ -59,19 +55,19 @@ pub fn Plugin(
                 }
             }
 
-            callbacks.on_library_loaded(instance, module, library_name);
+            config.callbacks.on_library_loaded(instance, module, library_name);
         }
     };
 
     const callbacks_instance: extern struct { vtable: *const PluginCallbacks } = .{
         .vtable = &.{
             .init = &Proxies.init,
-            .finalize = callbacks.finalize,
-            .unload = callbacks.unload,
-            .on_sqvm_created = callbacks.on_sqvm_created,
-            .on_sqvm_destroying = callbacks.on_sqvm_destroying,
+            .finalize = config.callbacks.finalize,
+            .unload = config.callbacks.unload,
+            .on_sqvm_created = config.callbacks.on_sqvm_created,
+            .on_sqvm_destroying = config.callbacks.on_sqvm_destroying,
             .on_library_loaded = &Proxies.onLibraryLoaded,
-            .run_frame = callbacks.run_frame,
+            .run_frame = config.callbacks.run_frame,
         },
     };
 
@@ -95,7 +91,7 @@ pub fn Plugin(
                 return @constCast(iface);
             }
 
-            if (interfaces.get(name_slice)) |iface| {
+            if (config.interfaces.get(name_slice)) |iface| {
                 if (maybe_status) |status| {
                     status.* = .ok;
                 }
@@ -127,11 +123,17 @@ pub fn Plugin(
     return I;
 }
 
+pub const Config = struct {
+    info: PluginIdConfig,
+    callbacks: PluginCallbacks = .{},
+    interfaces: std.StaticStringMap(*fn () *anyopaque) = .{},
+};
+
 const std = @import("std");
 const modules = @import("modules.zig");
 const interface = @import("interfaces.zig");
 const sq = @import("squirrel.zig");
 const InterfaceStatus = interface.InterfaceStatus;
-const PluginConfig = interface.PluginConfig;
+const PluginIdConfig = interface.PluginIdConfig;
 const PluginId = interface.PluginId;
 const PluginCallbacks = interface.PluginCallbacks;
