@@ -220,7 +220,6 @@ pub const ConCommand = extern struct {
         // ...
     };
 
-
     test "layout" {
         abi.assertSize(@This(), 0x58);
     }
@@ -246,7 +245,6 @@ pub const IConVar = extern struct {
         // ...
     };
 };
-
 
 pub const ConVar = extern struct {
     vtable: *const VTable,
